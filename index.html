@@ -7,13 +7,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fff; }
+        body { font-family: 'Inter', sans-serif; background-color: #fff; scroll-behavior: smooth; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        .slide { transition: opacity 1s ease-in-out; }
     </style>
 </head>
-<body class="pb-20"> <header class="flex justify-between items-center px-4 py-3 sticky top-0 bg-white z-50">
+<body class="pb-24">
+
+    <header class="flex justify-between items-center px-4 py-3 sticky top-0 bg-white z-50 shadow-sm">
         <div class="flex items-center space-x-2">
-            <img src="https://via.placeholder.com/30" alt="Logo" class="rounded-full">
+            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">S</div>
             <h1 class="text-blue-500 font-bold text-xl">Shadow</h1>
         </div>
         <div class="flex space-x-4 text-gray-400 text-xl">
@@ -29,45 +32,51 @@
     </nav>
 
     <div class="flex space-x-2 px-4 py-4 overflow-x-auto no-scrollbar">
-        <button class="bg-blue-500 text-white px-6 py-1 rounded-full text-sm">Today</button>
-        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm">Romance</button>
-        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm">Fantasy</button>
-        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm">BL</button>
-        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm">Investigation</button>
+        <button class="bg-blue-500 text-white px-6 py-1 rounded-full text-sm shrink-0">Today</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0">Romance</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0">Fantasy</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0">BL</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0">Investigation</button>
     </div>
 
-    <div class="px-4 relative">
-        <div class="w-full h-56 bg-gray-200 rounded-xl overflow-hidden relative">
-            <img src="https://via.placeholder.com/800x400" class="w-full h-full object-cover">
-            <div class="absolute bottom-4 left-4 text-white">
-                <h2 class="font-bold text-lg">Call Me As Your Name</h2>
-                <p class="text-xs opacity-80">Romance No.312</p>
+    <div class="px-4 relative group">
+        <div id="slider-container" class="relative w-full h-56 bg-gray-200 rounded-xl overflow-hidden shadow-md">
+            <div class="slide absolute inset-0 opacity-100"><img src="https://via.placeholder.com/1080x600?text=Story+1" class="w-full h-full object-cover"></div>
+            <div class="slide absolute inset-0 opacity-0"><img src="https://via.placeholder.com/1080x600?text=Story+2" class="w-full h-full object-cover"></div>
+            <div class="slide absolute inset-0 opacity-0"><img src="https://via.placeholder.com/1080x600?text=Story+3" class="w-full h-full object-cover"></div>
+            <div class="slide absolute inset-0 opacity-0"><img src="https://via.placeholder.com/1080x600?text=Story+4" class="w-full h-full object-cover"></div>
+            <div class="slide absolute inset-0 opacity-0"><img src="https://via.placeholder.com/1080x600?text=Story+5" class="w-full h-full object-cover"></div>
+            <div class="slide absolute inset-0 opacity-0"><img src="https://via.placeholder.com/1080x600?text=Story+6" class="w-full h-full object-cover"></div>
+            <div class="slide absolute inset-0 opacity-0"><img src="https://via.placeholder.com/1080x600?text=Story+7" class="w-full h-full object-cover"></div>
+            
+            <div class="absolute bottom-4 left-4 text-white bg-black/20 p-2 rounded backdrop-blur-sm">
+                <h2 class="font-bold text-lg" id="slide-title">Call Me As Your Name</h2>
             </div>
-            <div class="absolute bottom-4 right-4 flex space-x-1">
-                <div class="w-2 h-2 bg-white rounded-full"></div>
-                <div class="w-2 h-2 bg-white/50 rounded-full"></div>
-                <div class="w-2 h-2 bg-white/50 rounded-full"></div>
-            </div>
+        </div>
+
+        <div class="flex justify-center space-x-2 mt-3" id="dots-container">
+            <div class="dot w-2 h-2 rounded-full bg-blue-500 cursor-pointer transition-all"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all"></div>
         </div>
     </div>
 
-    <div class="flex justify-around py-8 px-4 text-center">
-        <div><div class="w-14 h-14 bg-gray-200 rounded-full mb-1 mx-auto"></div><span class="text-xs text-gray-500">Shop</span></div>
-        <div><div class="w-14 h-14 bg-gray-200 rounded-full mb-1 mx-auto"></div><span class="text-xs text-gray-500">Tasks</span></div>
-        <div><div class="w-14 h-14 bg-gray-200 rounded-full mb-1 mx-auto"></div><span class="text-xs text-gray-500">Ranking</span></div>
-        <div><div class="w-14 h-14 bg-gray-200 rounded-full mb-1 mx-auto"></div><span class="text-xs text-gray-500">Event</span></div>
+    <div class="grid grid-cols-4 gap-4 py-8 px-4 text-center">
+        <div class="cursor-pointer"><div class="w-14 h-14 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-shopping-bag text-gray-600"></i></div><span class="text-[10px] text-gray-500">Shop</span></div>
+        <div class="cursor-pointer"><div class="w-14 h-14 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-tasks text-gray-600"></i></div><span class="text-[10px] text-gray-500">Tasks</span></div>
+        <div class="cursor-pointer"><div class="w-14 h-14 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-trophy text-gray-600"></i></div><span class="text-[10px] text-gray-500">Ranking</span></div>
+        <div class="cursor-pointer"><div class="w-14 h-14 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-calendar-star text-gray-600"></i></div><span class="text-[10px] text-gray-500">Event</span></div>
     </div>
 
     <div class="px-4 mb-8">
         <h3 class="font-bold mb-4">Alpha Spotlight</h3>
         <div class="flex space-x-4 overflow-x-auto no-scrollbar">
-            <div class="min-w-[70%] h-40 bg-gray-200 rounded-lg"></div>
-            <div class="min-w-[70%] h-40 bg-gray-200 rounded-lg"></div>
-        </div>
-        <div class="flex justify-center space-x-1 mt-3">
-            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-            <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+            <div class="min-w-[85%] h-44 bg-gray-200 rounded-lg"></div>
+            <div class="min-w-[85%] h-44 bg-gray-200 rounded-lg"></div>
         </div>
     </div>
 
@@ -77,42 +86,78 @@
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <div class="aspect-[4/3] bg-gray-800 rounded-lg flex items-center justify-center text-white text-3xl mb-2">L</div>
-                <span class="bg-orange-400 text-white text-[10px] px-2 py-0.5 rounded">Fantasy</span>
-                <span class="text-gray-400 text-[10px] ml-2">EP 20</span>
-                <h4 class="font-bold text-sm mt-1">Book title</h4>
+                <div class="aspect-[3/4] bg-gray-800 rounded-lg flex items-center justify-center text-white text-3xl mb-2">L</div>
+                <div class="flex items-center space-x-2">
+                    <span class="bg-orange-400 text-white text-[10px] px-2 py-0.5 rounded">Fantasy</span>
+                    <span class="text-gray-400 text-[10px]">EP 20</span>
+                </div>
+                <h4 class="font-bold text-sm mt-1">Book title 1</h4>
             </div>
             <div>
-                <div class="aspect-[4/3] bg-gray-800 rounded-lg flex items-center justify-center text-white text-3xl mb-2">L</div>
-                <span class="bg-orange-400 text-white text-[10px] px-2 py-0.5 rounded">Romance</span>
-                <span class="text-gray-400 text-[10px] ml-2">EP 20</span>
-                <h4 class="font-bold text-sm mt-1">Book title</h4>
+                <div class="aspect-[3/4] bg-gray-800 rounded-lg flex items-center justify-center text-white text-3xl mb-2">L</div>
+                <div class="flex items-center space-x-2">
+                    <span class="bg-blue-400 text-white text-[10px] px-2 py-0.5 rounded">Romance</span>
+                    <span class="text-gray-400 text-[10px]">EP 15</span>
+                </div>
+                <h4 class="font-bold text-sm mt-1">Book title 2</h4>
             </div>
         </div>
     </div>
 
-    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3">
-        <div class="text-center text-black">
+    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-50">
+        <div class="text-center text-blue-500 cursor-pointer">
             <i class="fas fa-heart"></i>
             <p class="text-[10px]">For You</p>
         </div>
-        <div class="text-center text-gray-400">
+        <div class="text-center text-gray-400 cursor-pointer">
             <i class="fas fa-play-circle"></i>
             <p class="text-[10px]">Fast</p>
         </div>
-        <div class="text-center text-gray-400">
+        <div class="text-center text-gray-400 cursor-pointer">
             <i class="fas fa-compass"></i>
             <p class="text-[10px]">Discover</p>
         </div>
-        <div class="text-center text-gray-400">
+        <div class="text-center text-gray-400 cursor-pointer">
             <i class="fas fa-book"></i>
             <p class="text-[10px]">Library</p>
         </div>
-        <div class="text-center text-gray-400">
+        <div class="text-center text-gray-400 cursor-pointer">
             <i class="fas fa-user"></i>
             <p class="text-[10px]">Me</p>
         </div>
     </footer>
+
+    <script>
+        let currentSlideIdx = 0;
+        const allSlides = document.querySelectorAll('.slide');
+        const allDots = document.querySelectorAll('.dot');
+
+        function updateSlider(idx) {
+            allSlides.forEach((slide, i) => {
+                slide.style.opacity = i === idx ? '1' : '0';
+                allDots[i].classList.toggle('bg-blue-500', i === idx);
+                allDots[i].classList.toggle('bg-gray-300', i !== idx);
+                allDots[i].style.width = i === idx ? '24px' : '8px'; // ប៊ូតុងដែលកំពុងបង្ហាញនឹងវែងជាងគេបន្តិច
+            });
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(() => {
+            currentSlideIdx = (currentSlideIdx + 1) % allSlides.length;
+            updateSlider(currentSlideIdx);
+        }, 5000);
+
+        // Click on dots to change slide
+        allDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                currentSlideIdx = i;
+                updateSlider(i);
+            });
+        });
+
+        // Initialize first state
+        updateSlider(0);
+    </script>
 
 </body>
 </html>
