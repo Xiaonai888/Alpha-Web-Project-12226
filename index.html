@@ -18,59 +18,29 @@
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        
-        /* Layout Structure */
         .feed-container { max-width: 580px; margin: 0 auto; }
         .post-card { background: white; margin-bottom: 12px; border-bottom: 1px solid #ddd; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         @media (min-width: 640px) { .post-card { border-radius: 12px; border: 1px solid #ddd; } }
 
-        /* Square Post Images */
-        .post-img-square { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; display: block; }
+        /* Logic សម្រាប់ប្តូរ Tab */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        /* FB Reaction Bar */
-        .reaction-box {
-            display: none;
-            position: absolute;
-            bottom: 55px;
-            left: 10px;
-            background: white;
-            padding: 8px 12px;
-            border-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            z-index: 500;
-            gap: 12px;
-            animation: reactionPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes reactionPop {
-            from { transform: translateY(20px) scale(0.5); opacity: 0; }
-            to { transform: translateY(0) scale(1); opacity: 1; }
-        }
+        /* Slide / Banner Style */
+        .banner-slide { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; object-fit: cover; }
+        
+        /* Genre Button Style */
+        .genre-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid #ddd; font-size: 12px; font-weight: 600; white-space: nowrap; transition: all 0.2s; }
+        .genre-btn:hover { background: #1877f2; color: white; border-color: #1877f2; }
+
+        /* Reaction Bar */
+        .reaction-box { display: none; position: absolute; bottom: 55px; left: 10px; background: white; padding: 8px 12px; border-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 500; gap: 12px; animation: reactionPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes reactionPop { from { transform: translateY(20px) scale(0.5); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
         .reaction-icon { width: 42px; height: 42px; cursor: pointer; transition: transform 0.2s ease; }
         .reaction-icon:hover { transform: scale(1.45) translateY(-8px); }
 
-        /* Comment Panel Slide Up */
-        #commentPanel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 85vh;
-            background: white;
-            z-index: 1000;
-            border-radius: 20px 20px 0 0;
-            transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-        }
+        #commentPanel { position: fixed; bottom: 0; left: 0; width: 100%; height: 85vh; background: white; z-index: 1000; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 -10px 40px rgba(0,0,0,0.2); }
         #commentPanel.active { transform: translateY(0); }
-
-        /* Echo Button Color */
-        .echo-active { color: #10b981 !important; font-weight: bold; }
-        .btn-press:active { transform: scale(0.95); }
-
-        /* Logic សម្រាប់បិទបើកទំព័រ */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
     </style>
 </head>
 <body class="pb-24">
@@ -84,40 +54,50 @@
                 <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-all"><i class="fab fa-facebook-messenger text-xl"></i></button>
             </div>
         </div>
-        <div class="flex justify-around text-gray-500 font-bold text-sm border-t border-gray-50">
-            <button class="flex-1 py-3 text-blue-600 border-b-4 border-blue-600">For You</button>
-            <button class="flex-1 py-3 hover:bg-gray-50 transition-colors">Following</button>
-        </div>
     </header>
 
     <div class="feed-container">
         
         <div id="for-you-page" class="tab-content active">
-            <div class="post-card p-4">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold border-2 border-white shadow-sm">U</div>
-                    <button onclick="alert('Open Post Editor')" class="flex-1 bg-gray-100 rounded-full py-2.5 px-5 text-left text-gray-500 text-sm hover:bg-gray-200 transition-all active:scale-95">តើអ្នកកំពុងគិតអ្វី?</button>
-                </div>
-                <div class="flex justify-around border-t pt-3 text-[11px] font-bold text-gray-600">
-                    <div class="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-3 py-1 rounded-lg"><i class="fas fa-video text-red-500"></i> <span>Live</span></div>
-                    <div class="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-3 py-1 rounded-lg"><i class="fas fa-images text-green-500"></i> <span>Photo</span></div>
-                    <div class="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 px-3 py-1 rounded-lg"><i class="fas fa-laugh text-yellow-500"></i> <span>Feeling</span></div>
+            
+            <div class="px-4 py-4">
+                <div class="relative overflow-hidden rounded-2xl shadow-lg">
+                    <img src="https://via.placeholder.com/800x450?text=Trending+Novel+Slide" class="banner-slide">
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <span class="bg-blue-600 px-2 py-1 rounded text-[10px] font-bold">HOT RELEASE</span>
+                        <h2 class="text-lg font-bold drop-shadow-md">ស្រមោលស្នេហ៍បិសាច</h2>
+                    </div>
                 </div>
             </div>
 
-            <div class="post-card py-4 overflow-hidden">
-                <div class="flex space-x-2.5 px-4 overflow-x-auto no-scrollbar">
-                    <div class="min-w-[115px] h-48 bg-gray-100 rounded-2xl relative overflow-hidden border border-gray-200 shrink-0 shadow-sm">
-                        <img src="https://via.placeholder.com/115x145?text=Me" class="w-full h-3/4 object-cover">
-                        <div class="absolute bottom-0 w-full bg-white h-1/4 flex flex-col items-center">
-                            <div class="absolute -top-4 w-9 h-9 bg-blue-600 rounded-full border-4 border-white flex items-center justify-center text-white shadow-md"><i class="fas fa-plus"></i></div>
-                            <span class="text-[9px] mt-5 font-extrabold text-gray-800">Create Story</span>
-                        </div>
+            <div class="flex space-x-2 px-4 pb-4 overflow-x-auto no-scrollbar">
+                <button class="genre-btn bg-blue-600 text-white border-blue-600">ទាំងអស់</button>
+                <button class="genre-btn">មនោសញ្ចេតនា</button>
+                <button class="genre-btn">ភ័យរន្ធត់</button>
+                <button class="genre-btn">បុរាណ</button>
+                <button class="genre-btn">យុទ្ធសិល្ប៍</button>
+            </div>
+
+            <div class="px-4 mb-6">
+                <div class="flex justify-between items-end mb-3">
+                    <h3 class="font-bold text-gray-800">Must Read</h3>
+                    <a href="#" class="text-blue-600 text-xs font-bold">មើលទាំងអស់</a>
+                </div>
+                <div class="flex space-x-4 overflow-x-auto no-scrollbar">
+                    <div class="min-w-[120px]">
+                        <img src="https://via.placeholder.com/120x180?text=Book+1" class="rounded-lg shadow-md mb-2">
+                        <p class="text-xs font-bold line-clamp-1">សន្សើមផ្កាស្មៅ</p>
+                        <p class="text-[10px] text-gray-500">ដោយ៖ You</p>
                     </div>
-                    <div class="min-w-[115px] h-48 rounded-2xl relative overflow-hidden shrink-0 shadow-md">
-                        <img src="https://via.placeholder.com/230x460?text=Sovan+Story" class="w-full h-full object-cover">
-                        <div class="absolute top-2 left-2 w-10 h-10 rounded-full border-4 border-blue-600 overflow-hidden shadow-lg"><img src="https://via.placeholder.com/60"></div>
-                        <span class="absolute bottom-2 left-2 text-white text-[10px] font-bold drop-shadow-md">Sovan Dara</span>
+                    <div class="min-w-[120px]">
+                        <img src="https://via.placeholder.com/120x180?text=Book+2" class="rounded-lg shadow-md mb-2">
+                        <p class="text-xs font-bold line-clamp-1">ស្នេហ៍ក្នុងសុបិន</p>
+                        <p class="text-[10px] text-gray-500">ដោយ៖ Dara</p>
+                    </div>
+                    <div class="min-w-[120px]">
+                        <img src="https://via.placeholder.com/120x180?text=Book+3" class="rounded-lg shadow-md mb-2">
+                        <p class="text-xs font-bold line-clamp-1">សមុទ្រទឹកភ្នែក</p>
+                        <p class="text-[10px] text-gray-500">ដោយ៖ Lina</p>
                     </div>
                 </div>
             </div>
@@ -125,172 +105,57 @@
             <article class="post-card">
                 <div class="p-3.5 flex justify-between items-center">
                     <div class="flex items-center space-x-3">
-                        <div class="relative"><img src="https://via.placeholder.com/100" class="w-10 h-10 rounded-full border border-gray-100 shadow-sm"><div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div></div>
-                        <div><h4 class="font-bold text-[13px] hover:underline cursor-pointer">Sovan Dara</h4><p class="text-[10px] text-gray-500 font-medium">3 hours ago • <i class="fas fa-user-friends"></i></p></div>
+                        <img src="https://via.placeholder.com/100" class="w-10 h-10 rounded-full">
+                        <div><h4 class="font-bold text-[13px]">Sovan Dara</h4><p class="text-[10px] text-gray-500">3 hours ago</p></div>
                     </div>
-                    <button class="text-gray-400 hover:bg-gray-100 w-8 h-8 rounded-full transition-all"><i class="fas fa-ellipsis-h"></i></button>
                 </div>
-                <div class="px-3.5 pb-3.5 text-[13.5px] leading-relaxed">
-                    រីករាយថ្ងៃចុងសប្តាហ៍ជាមួយមិត្តភក្តិ! កាហ្វេនៅទីនេះពិតជាឆ្ងាញ់ខ្លាំងណាស់។ ☕️🥐✨ #CafeLife #WeekendVibes
-                </div>
-                <img src="https://via.placeholder.com/800x800?text=Square+Cafe+Photo" class="post-img-square cursor-pointer active:opacity-90 transition-opacity">
-                
-                <div class="px-4 py-3 flex justify-between items-center text-gray-500 text-[11px] border-b border-gray-50 mx-1">
-                    <div class="flex items-center space-x-1.5"><span class="flex -space-x-1"><i class="fas fa-thumbs-up bg-blue-500 text-white p-1 rounded-full border border-white text-[8px]"></i><i class="fas fa-heart bg-red-500 text-white p-1 rounded-full border border-white text-[8px]"></i></span><span class="font-bold">245</span></div>
-                    <div class="hover:underline cursor-pointer">18 Comments • 4 Echoes</div>
-                </div>
-
-                <div class="flex py-1 px-2 relative">
-                    <div class="reaction-box flex items-center" id="reactionBar1">
-                        <img src="https://img.icons8.com/color/48/thumbs-up.png" class="reaction-icon" onclick="setReaction(1, 'Like', '#1877f2')">
-                        <img src="https://img.icons8.com/color/48/filled-like.png" class="reaction-icon" onclick="setReaction(1, 'Love', '#f33e58')">
-                        <img src="https://img.icons8.com/color/48/grinning-face-with-smiling-eyes.png" class="reaction-icon" onclick="setReaction(1, 'Haha', '#f7b125')">
-                        <img src="https://img.icons8.com/color/48/wow.png" class="reaction-icon" onclick="setReaction(1, 'Wow', '#f7b125')">
-                        <img src="https://img.icons8.com/color/48/sad.png" class="reaction-icon" onclick="setReaction(1, 'Sad', '#f7b125')">
-                        <img src="https://img.icons8.com/color/48/angry.png" class="reaction-icon" onclick="setReaction(1, 'Angry', '#e9710f')">
-                    </div>
-                    <button onmousedown="startTimer(1)" onmouseup="stopTimer()" id="likeBtn1" class="flex-1 flex items-center justify-center space-x-2 py-2.5 hover:bg-gray-100 rounded-lg text-gray-600 font-bold transition-all btn-press">
-                        <i class="far fa-thumbs-up"></i> <span class="text-xs">Like</span>
-                    </button>
-                    <button onclick="openComments()" class="flex-1 flex items-center justify-center space-x-2 py-2.5 hover:bg-gray-100 rounded-lg text-gray-600 font-bold transition-all btn-press">
-                        <i class="far fa-comment"></i> <span class="text-xs">Comment</span>
-                    </button>
-                    <button onclick="echoAction(this)" class="flex-1 flex items-center justify-center space-x-2 py-2.5 hover:bg-gray-100 rounded-lg text-gray-600 font-bold transition-all btn-press">
-                        <i class="fas fa-share-square"></i> <span class="text-xs">Echo</span>
-                    </button>
-                </div>
+                <div class="px-3.5 pb-3.5 text-[13.5px]">រីករាយថ្ងៃចុងសប្តាហ៍ជាមួយមិត្តភក្តិ! ☕️</div>
+                <img src="https://via.placeholder.com/800x800?text=Square+Photo" class="w-full aspect-square object-cover">
             </article>
         </div>
 
         <div id="fast-page" class="tab-content">
-            <div class="post-card p-4">
-                <h4 class="font-bold text-xs text-gray-500 tracking-wider mb-4">FAST REELS FOR YOU</h4>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="aspect-[9/16] bg-gray-900 rounded-2xl relative overflow-hidden shadow-lg group cursor-pointer">
-                        <img src="https://via.placeholder.com/200x350?text=Fast+1" class="w-full h-full object-cover">
-                    </div>
-                    <div class="aspect-[9/16] bg-gray-900 rounded-2xl relative overflow-hidden shadow-lg group cursor-pointer">
-                        <img src="https://via.placeholder.com/200x350?text=Fast+2" class="w-full h-full object-cover">
-                    </div>
-                </div>
+            <div class="p-4"><h2 class="font-bold text-lg">Fast Reels</h2></div>
             </div>
-        </div>
 
         <div id="discover-page" class="tab-content">
-            <article class="post-card">
-                <div class="p-3.5 flex justify-between items-center">
-                    <h4 class="font-bold text-[13px] text-gray-800 uppercase tracking-tight">Suggested for you</h4>
-                </div>
-                <div class="px-3.5 flex items-center space-x-3 mb-4">
-                    <img src="https://via.placeholder.com/100" class="w-11 h-11 rounded-full border">
-                    <div class="flex-1"><h4 class="font-bold text-sm">Art Shadow Studio</h4><p class="text-[10px] text-gray-500">Based on your interests</p></div>
-                    <button class="bg-blue-100 text-blue-600 px-4 py-1.5 rounded-lg font-bold text-[11px] hover:bg-blue-200 transition-all">Follow</button>
-                </div>
-                <img src="https://via.placeholder.com/800x800?text=Art+Square+Work" class="post-img-square">
-            </article>
-        </div>
+            <div class="p-4"><h2 class="font-bold text-lg">Discover New Stories</h2></div>
+            </div>
 
-        <div class="py-16 text-center text-gray-400">
-            <i class="fas fa-check-circle text-4xl mb-3 text-gray-200"></i>
-            <p class="text-xs font-bold uppercase tracking-widest">You're all caught up</p>
-        </div>
-    </div>
-
-    <div id="commentPanel" class="no-scrollbar">
-        <div class="flex flex-col h-full">
-            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3 mb-1"></div>
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="font-bold text-sm">Comments</h3>
-                <button onclick="closeComments()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
-                <div class="flex space-x-3">
-                    <img src="https://via.placeholder.com/50" class="w-9 h-9 rounded-full border">
-                    <div class="bg-gray-100 p-3 rounded-2xl max-w-[85%] shadow-sm">
-                        <p class="font-bold text-xs">Rithy Samnang</p>
-                        <p class="text-sm mt-1">រឿងនេះពិតជាជក់ចិត្តខ្លាំងណាស់! ចាំមើលវគ្គក្រោយទៀតបង។ ❤️</p>
-                    </div>
-                </div>
-            </div>
-            <div class="p-4 border-t flex items-center space-x-3 bg-white pb-8">
-                <img src="https://via.placeholder.com/50" class="w-9 h-9 rounded-full border">
-                <input type="text" placeholder="Write a comment..." class="flex-1 bg-gray-100 rounded-full px-5 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
-                <button class="text-blue-600 font-bold text-sm hover:scale-105 transition-transform">Post</button>
-            </div>
-        </div>
     </div>
 
     <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3.5 z-[200] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
-        <button onclick="switchTab('for-you-page', this)" class="nav-item text-center text-blue-600 flex flex-col items-center group transition-all">
+        <button onclick="switchTab('for-you-page', this)" class="nav-item text-center text-blue-600 flex flex-col items-center">
             <i class="fas fa-heart text-[20px] mb-0.5"></i>
             <p class="text-[10px] font-bold">For You</p>
         </button>
-        <button onclick="switchTab('fast-page', this)" class="nav-item text-center text-gray-400 hover:text-blue-600 flex flex-col items-center group transition-all">
+        <button onclick="switchTab('fast-page', this)" class="nav-item text-center text-gray-400 flex flex-col items-center">
             <i class="fas fa-play-circle text-[20px] mb-0.5"></i>
             <p class="text-[10px] font-semibold">Fast</p>
         </button>
-        <button onclick="switchTab('discover-page', this)" class="nav-item text-center text-gray-400 hover:text-blue-600 flex flex-col items-center group transition-all">
+        <button onclick="switchTab('discover-page', this)" class="nav-item text-center text-gray-400 flex flex-col items-center">
             <i class="fas fa-compass text-[22px] mb-0.5"></i>
             <p class="text-[10px] font-semibold">Discover</p>
         </button>
-        <div class="text-center text-gray-400 flex flex-col items-center hover:text-blue-600 cursor-pointer"><i class="fas fa-book text-[20px] mb-0.5"></i><p class="text-[10px]">Library</p></div>
-        <div class="text-center text-gray-400 flex flex-col items-center hover:text-blue-600 cursor-pointer"><i class="fas fa-user text-[20px] mb-0.5"></i><p class="text-[10px]">Me</p></div>
+        <div class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-book text-[20px] mb-0.5"></i><p class="text-[10px]">Library</p></div>
+        <div class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-user text-[20px] mb-0.5"></i><p class="text-[10px]">Me</p></div>
     </footer>
 
     <script>
-        // ១. មុខងារសម្រាប់ប្តូរ Tab (For You, Fast, Discover)
         function switchTab(pageId, element) {
-            // លាក់គ្រប់ Page ទាំងអស់
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            // បង្ហាញ Page ដែលចង់បាន
             document.getElementById(pageId).classList.add('active');
 
-            // ដូរពណ៌ Icon ក្នុង Footer
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('text-blue-600');
                 item.classList.add('text-gray-400');
-                item.querySelector('p').style.fontWeight = 'normal';
+                item.querySelector('p').classList.remove('font-bold');
+                item.querySelector('p').classList.add('font-semibold');
             });
             element.classList.add('text-blue-600');
             element.classList.remove('text-gray-400');
-            element.querySelector('p').style.fontWeight = 'bold';
-            
+            element.querySelector('p').classList.add('font-bold');
             window.scrollTo(0, 0);
-        }
-
-        // --- Logic ដើមរបស់អ្នកទាំងអស់ ---
-        let reactionTimer;
-        const commentPanel = document.getElementById('commentPanel');
-
-        function startTimer(id) {
-            reactionTimer = setTimeout(() => {
-                document.getElementById('reactionBar' + id).style.display = 'flex';
-                if (navigator.vibrate) navigator.vibrate(50);
-            }, 600); 
-        }
-
-        function stopTimer() { clearTimeout(reactionTimer); }
-
-        function setReaction(id, type, color) {
-            const btn = document.getElementById('likeBtn' + id);
-            btn.style.color = color;
-            btn.querySelector('span').innerText = type;
-            btn.querySelector('i').className = 'fas fa-thumbs-up'; 
-            document.getElementById('reactionBar' + id).style.display = 'none';
-        }
-
-        function echoAction(btn) {
-            btn.classList.toggle('echo-active');
-            if(btn.classList.contains('echo-active')) { alert('Echoed successfully! 📣'); }
-        }
-
-        function openComments() { commentPanel.classList.add('active'); }
-        function closeComments() { commentPanel.classList.remove('active'); }
-
-        window.onclick = function(event) {
-            if (!event.target.closest('.reaction-box') && !event.target.closest('button[id^="likeBtn"]')) {
-                document.querySelectorAll('.reaction-box').forEach(box => box.style.display = 'none');
-            }
         }
     </script>
 </body>
