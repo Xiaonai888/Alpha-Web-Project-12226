@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow - Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', 'Hanuman', sans-serif; background-color: #fff; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        /* ធ្វើឱ្យ Input មើលទៅអាជីពពេលចុច */
+        .search-focus:focus-within {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="p-4 bg-white">
+
+    <div class="flex items-center space-x-3 mb-6">
+        <a href="index.html" class="text-gray-500 text-xl"><i class="fa-solid fa-chevron-left"></i></a>
+        
+        <div class="flex-1 flex items-center bg-gray-100 rounded-2xl px-4 py-3 search-focus transition-all duration-300 border border-transparent">
+            <input type="text" placeholder="Search Shadow" class="bg-transparent w-full outline-none text-gray-700 text-sm">
+            <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-gray-800">Search History</h3>
+            <button class="text-gray-400 hover:text-red-500 transition-colors"><i class="fa-regular fa-trash-can text-lg"></i></button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            <div class="bg-gray-100 px-4 py-2 rounded-full text-xs text-gray-600 flex items-center shadow-sm border border-gray-50">
+                Reaper Of Soul <span class="ml-2 font-bold opacity-50">X</span>
+            </div>
+            <div class="bg-gray-100 px-4 py-2 rounded-full text-xs text-gray-600 flex items-center shadow-sm border border-gray-50">
+                Goddess of Psychology <span class="ml-2 font-bold opacity-50">X</span>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="font-bold text-gray-800 mb-6">Top Search</h3>
+        
+        <div class="space-y-6">
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <div class="w-16 h-20 bg-gray-200 rounded-lg overflow-hidden shadow-md">
+                        <img src="https://via.placeholder.com/150x200" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -left-2 -top-2 w-7 h-7 bg-yellow-400 rounded-full flex items-center justify-center text-white border-2 border-white shadow-sm">
+                        <span class="text-[10px] font-bold">1</span>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-bold text-gray-800 text-sm">Name Book</h4>
+                    <p class="text-gray-400 text-[10px] mb-2">Author Name</p>
+                    <div class="flex items-center space-x-4 text-[10px] text-gray-500">
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 1000</span>
+                        <span><i class="fa-solid fa-eye text-blue-500 mr-1"></i> 100k</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <div class="w-16 h-20 bg-gray-200 rounded-lg overflow-hidden shadow-sm"></div>
+                    <div class="absolute -left-2 -top-2 w-7 h-7 bg-slate-300 rounded-full flex items-center justify-center text-white border-2 border-white shadow-sm">
+                        <span class="text-[10px] font-bold">2</span>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-bold text-gray-800 text-sm">Name Book</h4>
+                    <p class="text-gray-400 text-[10px] mb-2">Author Name</p>
+                    <div class="flex items-center space-x-4 text-[10px] text-gray-500">
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 1000</span>
+                        <span><i class="fa-solid fa-eye text-blue-500 mr-1"></i> 100k</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <div class="w-16 h-20 bg-gray-200 rounded-lg overflow-hidden shadow-sm"></div>
+                    <div class="absolute -left-2 -top-2 w-7 h-7 bg-orange-400 rounded-full flex items-center justify-center text-white border-2 border-white shadow-sm">
+                        <span class="text-[10px] font-bold">3</span>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-bold text-gray-800 text-sm">Name Book</h4>
+                    <p class="text-gray-400 text-[10px] mb-2">Author Name</p>
+                    <div class="flex items-center space-x-4 text-[10px] text-gray-500">
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 1000</span>
+                        <span><i class="fa-solid fa-eye text-blue-500 mr-1"></i> 100k</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <div class="w-16 h-20 bg-gray-200 rounded-lg overflow-hidden"></div>
+                    <div class="absolute -left-2 -top-2 w-7 h-7 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 border-2 border-white shadow-sm font-bold text-[10px]">
+                        4
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-bold text-gray-800 text-sm">Name Book</h4>
+                    <p class="text-gray-400 text-[10px] mb-2">Author Name</p>
+                    <div class="flex items-center space-x-4 text-[10px] text-gray-500">
+                        <span><i class="fa-solid fa-heart text-red-500 mr-1"></i> 1000</span>
+                        <span><i class="fa-solid fa-eye text-blue-500 mr-1"></i> 100k</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
