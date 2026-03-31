@@ -6,26 +6,44 @@
     <title>Shadow - For You</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #fff; overflow-x: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* កូដសម្រាប់ធ្វើឱ្យរូបសងខាងស្រអាប់ និងតូចជាងមុន */
-        .slider-item {
-            transition: all 0.5s ease;
-            opacity: 0.4;
-            transform: scale(0.85);
-            min-width: 80%; /* បង្ហាញរូបកណ្តាល ៨០% នៃអេក្រង់ ដើម្បីឱ្យឃើញគែមសងខាងខ្លះ */
+        /* ស្ទីលសម្រាប់ Swiper Carousel */
+        .swiper-container {
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
-        .slider-item.active {
-            opacity: 1;
-            transform: scale(1);
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 80%; /* កំណត់ឱ្យរូបកណ្តាលបង្ហាញ ៨០% នៃអេក្រង់ ដើម្បីឱ្យឃើញគែមរូបជិតខាង */
+            height: auto;
+            border-radius: 20px; /* ជ្រុងមូលស្អាត */
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* ស្រមោលតិចៗ */
+            transition: transform 0.3s;
+        }
+        
+        /* ធ្វើឱ្យរូបភាពដែលមិនមែននៅកណ្តាល ស្រអាប់បន្តិច */
+        .swiper-slide-next, .swiper-slide-prev {
+            opacity: 0.5;
+            transform: scale(0.9); /* តូចជាងមុនបន្តិច */
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #3b82f6; /* ពណ៌ខៀវសម្រាប់ Dot សកម្ម */
+            width: 20px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body class="pb-24">
 
-    <header class="flex justify-between items-center px-4 py-3 sticky top-0 bg-white z-50">
+    <header class="flex justify-between items-center px-4 py-3 sticky top-0 bg-white z-50 shadow-sm">
         <div class="flex items-center space-x-2">
             <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">S</div>
             <h1 class="text-blue-500 font-bold text-xl">Shadow</h1>
@@ -47,46 +65,36 @@
         <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">Romance</button>
         <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">Fantasy</button>
         <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">BL</button>
-        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">Investigation</button>
     </div>
 
-    <div class="relative w-full overflow-hidden py-2">
-        <div id="slider" class="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing">
-            <div class="slider-item active relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
-                <img src="https://via.placeholder.com/1080x600/1a1a1a/ffffff?text=Slide+1" class="w-full h-full object-cover">
-                <div class="absolute bottom-4 left-4 text-white bg-black/30 p-2 rounded backdrop-blur-md">
+    <div class="swiper-container mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide relative aspect-[16/9]">
+                <img src="https://via.placeholder.com/1080x600/1a1a1a/ffffff?text=Slide+1+(16:9)" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 text-white bg-black/40 p-2 rounded backdrop-blur-sm">
                     <h2 class="font-bold">Call Me As Your Name</h2>
                 </div>
             </div>
-            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+            <div class="swiper-slide relative aspect-[16/9]">
                 <img src="https://via.placeholder.com/1080x600/333333/ffffff?text=Slide+2" class="w-full h-full object-cover">
             </div>
-            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+            <div class="swiper-slide relative aspect-[16/9]">
                 <img src="https://via.placeholder.com/1080x600/000000/ffffff?text=Slide+3" class="w-full h-full object-cover">
             </div>
-            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+            <div class="swiper-slide relative aspect-[16/9]">
                 <img src="https://via.placeholder.com/1080x600/444444/ffffff?text=Slide+4" class="w-full h-full object-cover">
             </div>
-            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+            <div class="swiper-slide relative aspect-[16/9]">
                 <img src="https://via.placeholder.com/1080x600/555555/ffffff?text=Slide+5" class="w-full h-full object-cover">
             </div>
-            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+            <div class="swiper-slide relative aspect-[16/9]">
                 <img src="https://via.placeholder.com/1080x600/222222/ffffff?text=Slide+6" class="w-full h-full object-cover">
             </div>
-            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+            <div class="swiper-slide relative aspect-[16/9]">
                 <img src="https://via.placeholder.com/1080x600/666666/ffffff?text=Slide+7" class="w-full h-full object-cover">
             </div>
         </div>
-
-        <div class="flex justify-center space-x-2 mt-4" id="dots">
-            <div class="dot w-6 h-2 rounded-full bg-blue-500 transition-all duration-300"></div>
-            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
-            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
-            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
-            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
-            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
-            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
-        </div>
+        <div class="swiper-pagination"></div>
     </div>
 
     <div class="grid grid-cols-4 gap-4 py-8 px-4 text-center">
@@ -126,40 +134,31 @@
         <div class="text-center text-gray-400"><i class="fas fa-user"></i><p class="text-[10px]">Me</p></div>
     </footer>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        const slider = document.getElementById('slider');
-        const items = document.querySelectorAll('.slider-item');
-        const dots = document.querySelectorAll('.dot');
-        let index = 0;
-
-        function updateSlider() {
-            // គណនាចម្ងាយដែលត្រូវរំកិល ដើម្បីឱ្យរូបភាពមកកណ្តាល
-            const offset = index * -80; // ៨០% គឺជាទំហំរូបភាព
-            slider.style.transform = `translateX(${offset + 10}%)`; // ១០% គឺជាចន្លោះសងខាង
-
-            items.forEach((item, i) => {
-                item.classList.toggle('active', i === index);
-            });
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('bg-blue-500', i === index);
-                dot.classList.toggle('bg-gray-300', i !== index);
-                dot.style.width = i === index ? '24px' : '8px';
-            });
-        }
-
-        setInterval(() => {
-            index = (index + 1) % items.length;
-            updateSlider();
-        }, 4000);
-
-        // ឱ្យអ្នកប្រើចុចលើ Dot ប្តូរបាន
-        dots.forEach((dot, i) => {
-            dot.onclick = () => { index = i; updateSlider(); };
+        // ការកំណត់ Swiper
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow", // បែប Coverflow
+            grabCursor: true,
+            centeredSlides: true, // ឱ្យរូបកណ្តាលមកចំកណ្តាល
+            slidesPerView: "auto", // គណនាចំនួនរូបបង្ហាញអូតូ
+            coverflowEffect: {
+                rotate: 0, // កុំឱ្យវាងាក
+                stretch: 0,
+                depth: 100, // បង្កើតជម្រៅ (រូបពីក្រោយមើលទៅឆ្ងាយជាង)
+                modifier: 2,
+                slideShadows: false, // លាក់ស្រមោលស្លាយ
+            },
+            loop: true, // ឱ្យវាវិលជុំវិញ
+            autoplay: {
+                delay: 4000, // ដូររូបរៀងរាល់ ៤ វិនាទី
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
         });
-
-        // បង្ហាញស្ថានភាពដំបូង
-        updateSlider();
     </script>
 </body>
 </html>
