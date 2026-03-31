@@ -1,76 +1,165 @@
-<div class="px-0 relative mt-2 group"> <div class="main-carousel w-full aspect-[16/9] bg-white rounded-xl overflow-hidden focus:outline-none shadow-lg">
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow - For You</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff; overflow-x: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        <div class="carousel-cell w-4/5 h-full mr-4 rounded-xl overflow-hidden relative">
-            <img src="តំណភ្ជាប់រូបភាពទី១_16x9.webp" class="w-full h-full object-cover">
-            <div class="absolute bottom-4 left-4 text-white bg-black/30 p-2 rounded backdrop-blur-sm">
-                <h2 class="font-bold text-lg">Call Me As Your Name</h2>
+        /* កូដសម្រាប់ធ្វើឱ្យរូបសងខាងស្រអាប់ និងតូចជាងមុន */
+        .slider-item {
+            transition: all 0.5s ease;
+            opacity: 0.4;
+            transform: scale(0.85);
+            min-width: 80%; /* បង្ហាញរូបកណ្តាល ៨០% នៃអេក្រង់ ដើម្បីឱ្យឃើញគែមសងខាងខ្លះ */
+        }
+        .slider-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="pb-24">
+
+    <header class="flex justify-between items-center px-4 py-3 sticky top-0 bg-white z-50">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">S</div>
+            <h1 class="text-blue-500 font-bold text-xl">Shadow</h1>
+        </div>
+        <div class="flex space-x-4 text-gray-400 text-xl">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-bell"></i>
+        </div>
+    </header>
+
+    <nav class="flex px-4 space-x-6 border-b border-gray-100">
+        <button class="pb-2 border-b-2 border-blue-500 text-blue-500 font-bold">Novel</button>
+        <button class="pb-2 text-gray-400">Chat Story</button>
+        <button class="pb-2 text-gray-400">Manga</button>
+    </nav>
+
+    <div class="flex space-x-2 px-4 py-4 overflow-x-auto no-scrollbar">
+        <button class="bg-blue-500 text-white px-6 py-1 rounded-full text-sm shrink-0 shadow-md shadow-blue-200">Today</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">Romance</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">Fantasy</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">BL</button>
+        <button class="border border-gray-200 px-6 py-1 rounded-full text-sm shrink-0 text-gray-600">Investigation</button>
+    </div>
+
+    <div class="relative w-full overflow-hidden py-2">
+        <div id="slider" class="flex transition-transform duration-500 ease-out cursor-grab active:cursor-grabbing">
+            <div class="slider-item active relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/1a1a1a/ffffff?text=Slide+1" class="w-full h-full object-cover">
+                <div class="absolute bottom-4 left-4 text-white bg-black/30 p-2 rounded backdrop-blur-md">
+                    <h2 class="font-bold">Call Me As Your Name</h2>
+                </div>
+            </div>
+            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/333333/ffffff?text=Slide+2" class="w-full h-full object-cover">
+            </div>
+            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/000000/ffffff?text=Slide+3" class="w-full h-full object-cover">
+            </div>
+            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/444444/ffffff?text=Slide+4" class="w-full h-full object-cover">
+            </div>
+            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/555555/ffffff?text=Slide+5" class="w-full h-full object-cover">
+            </div>
+            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/222222/ffffff?text=Slide+6" class="w-full h-full object-cover">
+            </div>
+            <div class="slider-item relative aspect-[16/9] rounded-2xl overflow-hidden shadow-xl mx-2">
+                <img src="https://via.placeholder.com/1080x600/666666/ffffff?text=Slide+7" class="w-full h-full object-cover">
             </div>
         </div>
-        
-        <div class="carousel-cell w-4/5 h-full mr-4 rounded-xl overflow-hidden">
-            <img src="តំណភ្ជាប់រូបភាពទី២_16x9.webp" class="w-full h-full object-cover">
-        </div>
-        
-        <div class="carousel-cell w-4/5 h-full mr-4 rounded-xl overflow-hidden">
-            <img src="តំណភ្ជាប់រូបភាពទី៣_16x9.webp" class="w-full h-full object-cover">
-        </div>
 
+        <div class="flex justify-center space-x-2 mt-4" id="dots">
+            <div class="dot w-6 h-2 rounded-full bg-blue-500 transition-all duration-300"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
+            <div class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></div>
         </div>
-
-    <div class="flex justify-center space-x-2 mt-4" id="dots-container">
-        <div class="dot w-6 h-2 rounded-full bg-blue-500 cursor-pointer"></div>
-        <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer"></div>
-        <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer"></div>
-        <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer"></div>
-        <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer"></div>
-        <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer"></div>
-        <div class="dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer"></div>
     </div>
-</div>
 
-<style>
-    /* ធ្វើឱ្យរូបភាពសងខាងស្រអាប់ (Dimmed) */
-    .carousel-cell {
-        opacity: 0.5; /* កម្រិតស្រអាប់ ៥០% */
-        transform: scale(0.9); /* បង្រួមតូចបន្តិច */
-        transition: opacity 0.5s ease, transform 0.5s ease;
-    }
+    <div class="grid grid-cols-4 gap-4 py-8 px-4 text-center">
+        <div><div class="w-12 h-12 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-shopping-bag text-gray-500"></i></div><span class="text-[10px] text-gray-500">Shop</span></div>
+        <div><div class="w-12 h-12 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-tasks text-gray-500"></i></div><span class="text-[10px] text-gray-500">Tasks</span></div>
+        <div><div class="w-12 h-12 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-trophy text-gray-500"></i></div><span class="text-[10px] text-gray-500">Ranking</span></div>
+        <div><div class="w-12 h-12 bg-gray-100 rounded-full mb-1 mx-auto flex items-center justify-center"><i class="fas fa-calendar-alt text-gray-500"></i></div><span class="text-[10px] text-gray-500">Event</span></div>
+    </div>
 
-    /* ធ្វើឱ្យរូបភាពកណ្តាលច្បាស់ និងធំ */
-    .carousel-cell.is-selected {
-        opacity: 1; /* ជោគជ័យ ១០០% */
-        transform: scale(1); /* ទំហំដើម */
-    }
-</style>
+    <div class="px-4 mb-8">
+        <h3 class="font-bold mb-4">Alpha Spotlight</h3>
+        <div class="flex space-x-4 overflow-x-auto no-scrollbar">
+            <div class="min-w-[85%] h-44 bg-gray-100 rounded-2xl shadow-inner"></div>
+            <div class="min-w-[85%] h-44 bg-gray-100 rounded-2xl shadow-inner"></div>
+        </div>
+    </div>
 
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-<script>
-    // ខួរក្បាលបញ្ជា Carousel
-    var flkty = new Flickity('.main-carousel', {
-        cellAlign: 'center', // ឱ្យរូបភាពកណ្តាលមកចំកណ្តាល
-        contain: true,
-        wrapAround: true, // ឱ្យវាវិលជុំវិញ (៧ រូបភាព)
-        autoPlay: 5000, // ដូររូបរៀងរាល់ ៥ វិនាទី
-        prevNextButtons: false, // លាក់ប៊ូតុង Next/Prev ដើម្បីឱ្យដូច App អាជីព
-        pageDots: false // លាក់ Dots ដើមរបស់ Flickity
-    });
+    <div class="px-4 mb-8">
+        <h3 class="font-bold mb-4"><i class="fas fa-star text-yellow-400 mr-2"></i>Must Reads</h3>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <div class="aspect-[3/4] bg-gray-800 rounded-xl flex items-center justify-center text-white text-3xl mb-2">L</div>
+                <h4 class="font-bold text-sm">Book title 1</h4>
+            </div>
+            <div>
+                <div class="aspect-[3/4] bg-gray-800 rounded-xl flex items-center justify-center text-white text-3xl mb-2">L</div>
+                <h4 class="font-bold text-sm">Book title 2</h4>
+            </div>
+        </div>
+    </div>
 
-    // ភ្ជាប់គ្រាប់ចុច (Dots) ខាងក្រោមជាមួយ Carousel
-    var dotsContainer = document.getElementById('dots-container');
-    var dots = dotsContainer.querySelectorAll('.dot');
+    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-50">
+        <div class="text-center text-blue-500"><i class="fas fa-heart"></i><p class="text-[10px]">For You</p></div>
+        <div class="text-center text-gray-400"><i class="fas fa-play-circle"></i><p class="text-[10px]">Fast</p></div>
+        <div class="text-center text-gray-400"><i class="fas fa-compass"></i><p class="text-[10px]">Discover</p></div>
+        <div class="text-center text-gray-400"><i class="fas fa-book"></i><p class="text-[10px]">Library</p></div>
+        <div class="text-center text-gray-400"><i class="fas fa-user"></i><p class="text-[10px]">Me</p></div>
+    </footer>
 
-    flkty.on('select', function(index) {
-        dots.forEach(function(dot, i) {
-            dot.classList.toggle('bg-blue-500', i === index);
-            dot.classList.toggle('bg-gray-300', i !== index);
-            dot.style.width = i === index ? '24px' : '8px'; // គ្រាប់ចុចដែលកំពុងបង្ហាញនឹងវែងជាងគេ
+    <script>
+        const slider = document.getElementById('slider');
+        const items = document.querySelectorAll('.slider-item');
+        const dots = document.querySelectorAll('.dot');
+        let index = 0;
+
+        function updateSlider() {
+            // គណនាចម្ងាយដែលត្រូវរំកិល ដើម្បីឱ្យរូបភាពមកកណ្តាល
+            const offset = index * -80; // ៨០% គឺជាទំហំរូបភាព
+            slider.style.transform = `translateX(${offset + 10}%)`; // ១០% គឺជាចន្លោះសងខាង
+
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('bg-blue-500', i === index);
+                dot.classList.toggle('bg-gray-300', i !== index);
+                dot.style.width = i === index ? '24px' : '8px';
+            });
+        }
+
+        setInterval(() => {
+            index = (index + 1) % items.length;
+            updateSlider();
+        }, 4000);
+
+        // ឱ្យអ្នកប្រើចុចលើ Dot ប្តូរបាន
+        dots.forEach((dot, i) => {
+            dot.onclick = () => { index = i; updateSlider(); };
         });
-    });
 
-    // ឱ្យអ្នកប្រើចុចលើ Dot ដើម្បីប្តូររូប
-    dots.forEach(function(dot, i) {
-        dot.addEventListener('click', function() {
-            flkty.select(i);
-        });
-    });
-</script>
+        // បង្ហាញស្ថានភាពដំបូង
+        updateSlider();
+    </script>
+</body>
+</html>
