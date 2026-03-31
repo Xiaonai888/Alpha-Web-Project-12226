@@ -1,1 +1,103 @@
 
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Fast - Reels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&display=swap');
+        body { font-family: 'Kantumruy Pro', sans-serif; background-color: #000; margin: 0; overflow: hidden; }
+        
+        /* បង្កើត Scroll បែប TikTok/Reels */
+        .reels-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory; /* បង្ខំឱ្យឈប់ចំកណ្តាល */
+            scroll-behavior: smooth;
+        }
+        .reel-item {
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="reels-container no-scrollbar">
+
+        <div class="reel-item">
+            <img src="https://via.placeholder.com/1080x1920?text=Reel+1" class="absolute inset-0 w-full h-full object-cover">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
+
+            <div class="absolute right-4 bottom-32 flex flex-col space-y-6 text-white text-center">
+                <div class="group cursor-pointer">
+                    <i class="fas fa-heart text-2xl group-hover:scale-125 transition-transform"></i>
+                    <p class="text-[10px] mt-1">1.2K</p>
+                </div>
+                <div class="group cursor-pointer">
+                    <i class="fas fa-comment-dots text-2xl group-hover:scale-125 transition-transform"></i>
+                    <p class="text-[10px] mt-1">450</p>
+                </div>
+                <div class="group cursor-pointer">
+                    <i class="fas fa-share text-2xl group-hover:scale-125 transition-transform"></i>
+                    <p class="text-[10px] mt-1">Share</p>
+                </div>
+            </div>
+
+            <div class="relative p-5 text-white mb-20">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+                        <img src="https://via.placeholder.com/100" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-bold">Author_Shadow</h3>
+                    <button class="bg-blue-500 px-3 py-1 rounded-full text-[10px] font-bold">Follow</button>
+                </div>
+                <p class="text-sm line-clamp-2 opacity-90 mb-3">នេះគឺជាសាច់រឿងសង្ខេបដ៏ជក់ចិត្ត... #ShadowNovel #Reels #Fast</p>
+                <div class="flex items-center space-x-2 text-xs opacity-70">
+                    <i class="fas fa-music"></i>
+                    <span>Original Audio - Shadow Music</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reel-item">
+            <img src="https://via.placeholder.com/1080x1920?text=Reel+2" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
+            <div class="absolute right-4 bottom-32 flex flex-col space-y-6 text-white text-center">
+                <div class="cursor-pointer"><i class="fas fa-heart text-2xl"></i><p class="text-[10px] mt-1">800</p></div>
+                <div class="cursor-pointer"><i class="fas fa-comment-dots text-2xl"></i><p class="text-[10px] mt-1">120</p></div>
+                <div class="cursor-pointer"><i class="fas fa-share text-2xl"></i><p class="text-[10px] mt-1">Share</p></div>
+            </div>
+            <div class="relative p-5 text-white mb-20">
+                <h3 class="font-bold mb-1">@Shadow_King</h3>
+                <p class="text-sm opacity-90 mb-2">តើអ្នកត្រៀមខ្លួនសម្រាប់វគ្គថ្មីហើយឬនៅ? 😱</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="fixed bottom-0 w-full bg-black/20 backdrop-blur-md border-t border-white/10 flex justify-around py-3 z-50">
+        <a href="index.html" class="text-center text-gray-400">
+            <i class="fas fa-heart"></i>
+            <p class="text-[10px]">For You</p>
+        </a>
+        <div class="text-center text-blue-500">
+            <i class="fas fa-play-circle text-xl"></i>
+            <p class="text-[10px] font-bold">Fast</p>
+        </div>
+        <div class="text-center text-gray-400"><i class="fas fa-compass"></i><p class="text-[10px]">Discover</p></div>
+        <div class="text-center text-gray-400"><i class="fas fa-book"></i><p class="text-[10px]">Library</p></div>
+        <div class="text-center text-gray-400"><i class="fas fa-user"></i><p class="text-[10px]">Me</p></div>
+    </footer>
+
+</body>
+</html>
