@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow - Mine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', 'Kantumruy Pro', sans-serif; background-color: #f9f9f9; color: #1a1a1a; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Profile Header Gradient */
+        .profile-bg { background: linear-gradient(180deg, #fff 0%, #f9f9f9 100%); }
+        .login-btn { background: linear-gradient(90deg, #ff3b5c, #ff6b81); }
+        
+        /* Settings Overlay */
+        #settingsMenu { display: none; }
+        #settingsMenu.active { display: block; }
+    </style>
+</head>
+<body class="pb-28">
+
+    <div class="fixed top-0 left-0 w-full z-[110] flex justify-end px-5 py-4">
+        <button onclick="toggleSettings()" class="w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full shadow-sm">
+            <i class="fas fa-cog text-gray-700 text-xl"></i>
+        </button>
+    </div>
+
+    <section class="profile-bg pt-14 pb-8 px-6 text-center border-b border-gray-100">
+        <div class="relative inline-block mb-4">
+            <div class="w-24 h-24 bg-gray-200 rounded-full border-4 border-white shadow-md mx-auto flex items-center justify-center overflow-hidden">
+                <i class="fas fa-user text-gray-400 text-5xl"></i>
+            </div>
+        </div>
+        <h2 class="font-extrabold text-xl text-gray-900">ភ្ញៀវ (Guest)</h2>
+        <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest">Shadow ID: 000000</p>
+        
+        <a href="signup.html" class="login-btn inline-block mt-5 px-10 py-2.5 rounded-full text-white font-bold text-sm shadow-lg shadow-red-200 active:scale-95 transition-transform">
+            Login / Sign Up
+        </a>
+    </section>
+
+    <section class="grid grid-cols-3 gap-1 py-6 bg-white shadow-sm mb-4">
+        <div class="text-center border-r border-gray-50">
+            <p class="font-black text-lg">0</p>
+            <p class="text-[10px] text-gray-400 font-bold uppercase">Points</p>
+        </div>
+        <div class="text-center border-r border-gray-50">
+            <p class="font-black text-lg">0</p>
+            <p class="text-[10px] text-gray-400 font-bold uppercase">Vouchers</p>
+        </div>
+        <div class="text-center">
+            <p class="font-black text-lg">0</p>
+            <p class="text-[10px] text-gray-400 font-bold uppercase">Coins</p>
+        </div>
+    </section>
+
+    <section class="bg-white px-5 space-y-1">
+        <div class="flex items-center justify-between py-4 border-b border-gray-50 cursor-pointer">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-wallet text-orange-400"></i>
+                <span class="text-sm font-semibold">My Wallet</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-200 text-xs"></i>
+        </div>
+        <div class="flex items-center justify-between py-4 border-b border-gray-50 cursor-pointer">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-star text-yellow-400"></i>
+                <span class="text-sm font-semibold">VIP Membership</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-200 text-xs"></i>
+        </div>
+        <div class="flex items-center justify-between py-4 border-b border-gray-50 cursor-pointer">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-pen-nib text-blue-400"></i>
+                <span class="text-sm font-semibold">Become an Author</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-200 text-xs"></i>
+        </div>
+        <div class="flex items-center justify-between py-4 border-b border-gray-50 cursor-pointer">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-question-circle text-gray-400"></i>
+                <span class="text-sm font-semibold">Help & Feedback</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-200 text-xs"></i>
+        </div>
+    </section>
+
+    <div id="settingsMenu" class="fixed inset-0 bg-black/50 z-[200] backdrop-blur-sm">
+        <div class="absolute bottom-0 w-full bg-white rounded-t-3xl p-6 space-y-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-lg">ការកំណត់ (Settings)</h3>
+                <button onclick="toggleSettings()"><i class="fas fa-times text-gray-400"></i></button>
+            </div>
+            <div class="flex items-center justify-between py-3 border-b border-gray-50"><span>ភាសា / Language</span> <span class="text-sm text-blue-600 font-bold">ខ្មែរ</span></div>
+            <div class="flex items-center justify-between py-3 border-b border-gray-50"><span>Dark Mode</span> <div class="w-10 h-5 bg-gray-200 rounded-full"></div></div>
+            <div class="flex items-center justify-between py-3 border-b border-gray-50"><span>Clear Cache</span> <span class="text-xs text-gray-400">24 MB</span></div>
+            <button class="w-full py-4 text-red-500 font-bold text-center mt-4">ចាកចេញ (Log Out)</button>
+        </div>
+    </div>
+
+    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-[100] shadow-[0_-10px_25px_rgba(0,0,0,0.05)]">
+        <a href="index.html" class="text-center flex flex-col items-center group">
+            <i class="fas fa-home text-lg text-gray-400"></i>
+            <p class="text-[10px] font-bold text-gray-400 mt-1 uppercase">Home</p>
+        </a>
+        <a href="discover.html" class="text-center flex flex-col items-center group">
+            <i class="fas fa-comment-dots text-lg text-gray-400"></i>
+            <p class="text-[10px] font-bold text-gray-400 mt-1 uppercase">Chat</p>
+        </a>
+        <a href="library.html" class="text-center flex flex-col items-center group">
+            <i class="fas fa-layer-group text-lg text-gray-400"></i>
+            <p class="text-[10px] font-bold text-gray-400 mt-1 uppercase">Library</p>
+        </a>
+        <a href="me.html" class="text-center flex flex-col items-center">
+            <i class="fas fa-smile text-xl text-[#ff3b5c]"></i>
+            <p class="text-[10px] font-extrabold text-[#ff3b5c] mt-1 uppercase">Mine</p>
+        </a>
+    </footer>
+
+    <script>
+        function toggleSettings() {
+            document.getElementById('settingsMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
