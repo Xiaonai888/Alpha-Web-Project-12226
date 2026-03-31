@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Discover - Echo Your World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&display=swap');
+        body { font-family: 'Kantumruy Pro', sans-serif; background-color: #f0f2f5; color: #1c1e21; overflow-x: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Glassmorphism & Shadows */
+        .post-card { background: white; border-radius: 0px; border-bottom: 1px solid #ddd; margin-bottom: 10px; }
+        @media (min-width: 768px) { .post-card { border-radius: 12px; border: 1px solid #ddd; margin-bottom: 15px; } }
+
+        /* Slide up Comment Panel */
+        #commentPanel {
+            transition: transform 0.3s ease-out;
+            transform: translateY(100%);
+        }
+        #commentPanel.active { transform: translateY(0); }
+        
+        .tab-active { color: #1877f2; border-bottom: 3px solid #1877f2; }
+    </style>
+</head>
+<body class="pb-24">
+
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div class="px-4 py-2 flex justify-between items-center">
+            <h1 class="text-blue-600 font-extrabold text-2xl tracking-tighter italic">Echo</h1>
+            <div class="flex space-x-2">
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"><i class="fas fa-plus"></i></button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"><i class="fas fa-search"></i></button>
+                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 text-blue-600"><i class="fab fa-facebook-messenger"></i></button>
+            </div>
+        </div>
+        <div class="flex justify-around text-gray-500 font-bold text-sm">
+            <button class="flex-1 py-3 tab-active">For You</button>
+            <button class="flex-1 py-3 hover:bg-gray-50">Following</button>
+        </div>
+    </header>
+
+    <div class="bg-white p-4 mb-2 shadow-sm">
+        <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-200"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
+            <button class="flex-1 bg-gray-100 rounded-full py-2 px-4 text-left text-gray-500 text-sm active:scale-95 transition-transform">តើអ្នកកំពុងគិតអ្វី?</button>
+        </div>
+        <div class="flex justify-between border-t pt-3 text-[11px] font-bold text-gray-600">
+            <div class="flex items-center space-x-2 px-2 py-1"><i class="fas fa-video text-red-500 text-sm"></i> <span>Live</span></div>
+            <div class="flex items-center space-x-2 px-2 py-1"><i class="fas fa-images text-green-500 text-sm"></i> <span>Photo</span></div>
+            <div class="flex items-center space-x-2 px-2 py-1"><i class="fas fa-video-slash text-purple-500 text-sm"></i> <span>Room</span></div>
+        </div>
+    </div>
+
+    <div class="bg-white py-4 mb-2 overflow-hidden border-y border-gray-200">
+        <div class="flex space-x-2 px-4 overflow-x-auto no-scrollbar">
+            <div class="min-w-[110px] h-44 bg-gray-50 rounded-xl relative overflow-hidden border border-gray-200 shrink-0">
+                <img src="https://via.placeholder.com/110x130" class="w-full h-3/4 object-cover">
+                <div class="absolute bottom-0 w-full bg-white h-1/4 flex flex-col items-center">
+                    <div class="absolute -top-4 w-8 h-8 bg-blue-600 rounded-full border-4 border-white flex items-center justify-center text-white"><i class="fas fa-plus text-xs"></i></div>
+                    <span class="text-[9px] mt-4 font-bold">Create Story</span>
+                </div>
+            </div>
+            <div class="min-w-[110px] h-44 rounded-xl relative overflow-hidden shrink-0 shadow-sm">
+                <img src="https://via.placeholder.com/220x440?text=Sovan+Story" class="w-full h-full object-cover">
+                <div class="absolute top-2 left-2 w-9 h-9 rounded-full border-4 border-blue-600 overflow-hidden"><img src="https://via.placeholder.com/50"></div>
+                <span class="absolute bottom-2 left-2 text-white text-[10px] font-bold">Sovan Dara</span>
+            </div>
+            <div class="min-w-[110px] h-44 rounded-xl relative overflow-hidden shrink-0 shadow-sm">
+                <img src="https://via.placeholder.com/220x440?text=Lina+Story" class="w-full h-full object-cover">
+                <div class="absolute top-2 left-2 w-9 h-9 rounded-full border-4 border-blue-600 overflow-hidden"><img src="https://via.placeholder.com/50"></div>
+                <span class="absolute bottom-2 left-2 text-white text-[10px] font-bold">Lina Moon</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto">
+        <div class="post-card bg-white">
+            <div class="p-3 flex justify-between items-start">
+                <div class="flex items-center space-x-3">
+                    <img src="https://via.placeholder.com/100" class="w-10 h-10 rounded-full border">
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <h4 class="font-bold text-sm">Shadow Novel Official</h4>
+                            <i class="fas fa-check-circle text-blue-500 text-[10px]"></i>
+                        </div>
+                        <p class="text-[10px] text-gray-500">15m • <i class="fas fa-globe-americas"></i></p>
+                    </div>
+                </div>
+                <button class="text-gray-500 p-2"><i class="fas fa-ellipsis-h"></i></button>
+            </div>
+            <div class="px-3 pb-3 text-sm leading-relaxed">តួឯកប្រុសក្នុងរឿងថ្មីនេះ គឺសង្ហាខ្លាំងណាស់! តើអ្នកទាំងអស់គ្នាបានអានវគ្គទី ១០ ហើយឬនៅ? 📖✨ #Echo #Novel</div>
+            <img src="https://via.placeholder.com/800x500?text=Shadow+Novel+Update" class="w-full h-auto cursor-pointer">
+            
+            <div class="px-3 py-2 flex justify-between items-center text-gray-500 text-[11px] border-b mx-2">
+                <div class="flex items-center space-x-1">
+                    <span class="flex -space-x-1.5">
+                        <i class="fas fa-thumbs-up bg-blue-500 text-white p-1 rounded-full text-[8px] border border-white"></i>
+                        <i class="fas fa-heart bg-red-500 text-white p-1 rounded-full text-[8px] border border-white"></i>
+                    </span>
+                    <span class="pl-1">1.2K</span>
+                </div>
+                <div>45 Comments • 12 Echoes</div>
+            </div>
+
+            <div class="flex py-1 px-2">
+                <button onclick="toggleLike(this)" class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-md text-gray-600 transition-colors">
+                    <i class="far fa-thumbs-up"></i> <span class="text-xs font-bold">Like</span>
+                </button>
+                <button onclick="openComments()" class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-md text-gray-600">
+                    <i class="far fa-comment"></i> <span class="text-xs font-bold">Comment</span>
+                </button>
+                <button onclick="alert('Echoed to your profile!')" class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-md text-gray-600">
+                    <i class="fas fa-bullhorn"></i> <span class="text-xs font-bold">Echo</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="commentPanel" class="fixed bottom-0 left-0 w-full h-[80vh] bg-white z-[200] rounded-t-3xl shadow-2xl border-t border-gray-200">
+        <div class="flex flex-col h-full">
+            <div class="flex justify-between items-center p-4 border-b">
+                <span class="font-bold">Comments</span>
+                <button onclick="closeComments()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
+                <div class="flex space-x-2">
+                    <img src="https://via.placeholder.com/50" class="w-8 h-8 rounded-full">
+                    <div class="bg-gray-100 p-2 rounded-2xl text-xs">
+                        <p class="font-bold">User 888</p>
+                        <p>រឿងនេះជក់ចិត្តខ្លាំងណាស់បង! Echo ឱ្យមិត្តភក្តិមើលដែរ។</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full overflow-hidden bg-gray-200"><img src="https://via.placeholder.com/50"></div>
+                <input type="text" placeholder="Write a comment..." class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500">
+                <button class="text-blue-600 font-bold text-sm">Post</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-[150] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+        <a href="index.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
+            <i class="fas fa-heart text-lg mb-0.5"></i>
+            <p class="text-[10px]">For You</p>
+        </a>
+        <a href="fast.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
+            <i class="fas fa-play-circle text-lg mb-0.5"></i>
+            <p class="text-[10px]">Fast</p>
+        </a>
+        <a href="discover.html" class="text-center text-blue-600 flex flex-col items-center">
+            <i class="fas fa-compass text-xl mb-0.5"></i>
+            <p class="text-[10px] font-bold">Discover</p>
+        </a>
+        <div class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-book text-lg mb-0.5"></i><p class="text-[10px]">Library</p></div>
+        <div class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-user text-lg mb-0.5"></i><p class="text-[10px]">Me</p></div>
+    </footer>
+
+    <script>
+        function toggleLike(btn) {
+            const icon = btn.querySelector('i');
+            const span = btn.querySelector('span');
+            if (icon.classList.contains('far')) {
+                icon.className = 'fas fa-thumbs-up';
+                btn.style.color = '#1877f2';
+            } else {
+                icon.className = 'far fa-thumbs-up';
+                btn.style.color = '#4b5563';
+            }
+        }
+
+        function openComments() { document.getElementById('commentPanel').classList.add('active'); }
+        function closeComments() { document.getElementById('commentPanel').classList.remove('active'); }
+    </script>
+
+</body>
+</html>
