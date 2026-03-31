@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Fast - 10 Reels Experience</title>
+    <title>Shadow Fast - Reels Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&display=swap');
         body { font-family: 'Kantumruy Pro', sans-serif; background-color: #000; margin: 0; overflow: hidden; }
 
+        /* Reels Vertical Scroll */
         .reels-container {
             height: 100vh;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
             scrollbar-width: none;
+            padding-bottom: 70px; /* បន្ថែមចន្លោះដើម្បីកុំឱ្យ Footer បាំង Content ខាងក្រោម */
         }
         .reels-container::-webkit-scrollbar { display: none; }
+        
         .reel-item {
             height: 100vh;
             scroll-snap-align: start;
@@ -25,92 +28,90 @@
             flex-direction: column;
             justify-content: flex-end;
         }
-        .icon-shadow { text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); }
+
+        .icon-shadow { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); }
     </style>
 </head>
 <body>
 
     <div class="fixed top-10 left-0 w-full z-50 flex justify-center items-center px-6 text-white/80 font-bold space-x-6">
-        <button class="relative active text-white text-lg">Reels</button>
-        <button class="opacity-60 text-lg">Friends</button>
+        <button class="relative text-white text-lg after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-white after:rounded-full">Reels</button>
+        <button class="opacity-60 text-lg hover:opacity-100 transition-opacity">Friends</button>
+        <div class="absolute right-6"><i class="fas fa-camera text-xl"></i></div>
     </div>
 
-    <div class="reels-container">
+    <div class="reels-container no-scrollbar">
 
         <div class="reel-item">
-            <img src="https://via.placeholder.com/1080x1920?text=Reel+1" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
-            
-            <div class="absolute right-3 bottom-28 flex flex-col items-center space-y-5 text-white z-20">
+            <img src="https://via.placeholder.com/1080x1920?text=Fast+Content+1" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20"></div>
+
+            <div class="absolute right-3 bottom-32 flex flex-col items-center space-y-6 text-white z-20">
                 <div class="relative mb-2">
-                    <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
+                    <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden shadow-lg"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
                     <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-red-500 rounded-full w-4 h-4 flex items-center justify-center border-2 border-black"><i class="fas fa-plus text-[8px]"></i></div>
                 </div>
-                <div class="flex flex-col items-center"><i class="fas fa-heart text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">258K</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-comment-dots text-2xl icon-shadow transform -scale-x-100"></i><span class="text-[11px] mt-1 font-bold">2,152</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-paper-plane text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">3,372</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-bookmark text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">8,504</span></div>
-                <i class="fas fa-ellipsis-h text-xl mt-2"></i>
-                <div class="w-8 h-8 rounded-full border-2 border-white/50 bg-black mt-4 overflow-hidden">
+                <div class="flex flex-col items-center group cursor-pointer"><i class="fas fa-heart text-2xl icon-shadow group-active:scale-125 transition-transform"></i><span class="text-[11px] mt-1 font-bold">258K</span></div>
+                <div class="flex flex-col items-center group cursor-pointer"><i class="fas fa-comment-dots text-2xl icon-shadow transform -scale-x-100"></i><span class="text-[11px] mt-1 font-bold">2,152</span></div>
+                <div class="flex flex-col items-center group cursor-pointer"><i class="fas fa-paper-plane text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">3,372</span></div>
+                <div class="flex flex-col items-center group cursor-pointer"><i class="fas fa-bookmark text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">8,504</span></div>
+                <i class="fas fa-ellipsis-h text-xl mt-1 cursor-pointer"></i>
+                <div class="w-8 h-8 rounded-full border-2 border-white/50 bg-black mt-2 overflow-hidden shadow-md">
                     <img src="https://via.placeholder.com/50" class="w-full h-full object-cover">
                 </div>
             </div>
 
-            <div class="relative p-4 text-white mb-20 max-w-[85%] z-10">
+            <div class="relative p-4 text-white mb-24 max-w-[85%] z-10">
                 <div class="flex items-center space-x-3 mb-3">
                     <h3 class="font-bold text-sm">sonyakisa8 <i class="fas fa-check-circle text-blue-400 text-[10px]"></i></h3>
-                    <button class="border border-white/60 px-3 py-1 rounded-lg text-[10px] font-bold">Follow</button>
+                    <button class="border border-white/60 px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-white/10">Follow</button>
                 </div>
-                <p class="text-xs leading-relaxed line-clamp-2">🐱 #cat #funny #shadow_experience... ម៉ាក់ៗមើលមកខ្ញុំបន្តិចមក! ❤️✨</p>
-                <div class="flex items-center space-x-2 mt-4 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full w-max text-[10px]">
+                <p class="text-xs leading-relaxed line-clamp-2 opacity-90">🐱 #cat #funny #shadow_experience... ម៉ាក់ៗមើលមកខ្ញុំបន្តិចមក! ❤️✨</p>
+                <div class="flex items-center space-x-2 mt-4 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full w-max text-[10px]">
                     <i class="fas fa-music"></i> <span>sonyakisa8 • Original Audio</span>
                 </div>
             </div>
         </div>
 
-        <div class="reel-item">
-            <img src="https://via.placeholder.com/1080x1920?text=Reel+2" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
-            <div class="absolute right-3 bottom-28 flex flex-col items-center space-y-5 text-white z-20">
-                <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
-                <div class="flex flex-col items-center"><i class="fas fa-heart text-2xl"></i><span class="text-[11px] mt-1 font-bold">120K</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-comment-dots text-2xl"></i><span class="text-[11px] mt-1 font-bold">890</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-paper-plane text-2xl"></i><span class="text-[11px] mt-1 font-bold">500</span></div>
-                <div class="w-8 h-8 rounded-full border-2 border-white/50 bg-black mt-4 overflow-hidden"><img src="https://via.placeholder.com/50" class="w-full h-full object-cover"></div>
-            </div>
-            <div class="relative p-4 text-white mb-20 max-w-[85%] z-10">
-                <h3 class="font-bold text-sm mb-3">novel_lover</h3>
-                <p class="text-xs leading-relaxed">សង្សារខ្ញុំគឺជាបិសាច? 😱 #novel #romance #fantasy</p>
-            </div>
-        </div>
-
-        <div class="reel-item">
-            <img src="https://via.placeholder.com/1080x1920?text=Reel+3" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute right-3 bottom-28 flex flex-col items-center space-y-5 text-white z-20">
-                <i class="fas fa-heart text-2xl"></i><span class="text-[11px] font-bold">45K</span>
-                <i class="fas fa-comment-dots text-2xl"></i><span class="text-[11px] font-bold">230</span>
-                <div class="w-8 h-8 rounded-full border-2 border-white/50 bg-black mt-4 overflow-hidden"><img src="https://via.placeholder.com/50" class="w-full h-full object-cover"></div>
-            </div>
-            <div class="relative p-4 text-white mb-20">
-                <h3 class="font-bold text-sm">alpha_spotlight</h3>
-                <p class="text-xs">តួឯកប្រុសថ្ងៃនេះសង្ហាខ្លាំងណាស់! 😍 #alpha #spotlight</p>
-            </div>
-        </div>
-
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+4" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+5" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+6" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+7" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+8" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+9" class="absolute inset-0 w-full h-full object-cover"></div>
-        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Reel+10" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+2" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+3" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+4" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+5" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+6" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+7" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+8" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+9" class="absolute inset-0 w-full h-full object-cover"></div>
+        <div class="reel-item"><img src="https://via.placeholder.com/1080x1920?text=Fast+Content+10" class="absolute inset-0 w-full h-full object-cover"></div>
 
     </div>
 
-    <footer class="fixed bottom-0 w-full bg-black/40 backdrop-blur-lg border-t border-white/10 flex justify-around items-center py-4 z-50 text-white">
-        <a href="index.html" class="text-xl"><i class="fas fa-home"></i></a>
-        <a href="fast.html" class="text-2xl border-2 border-white rounded-lg p-1 px-1.5"><i class="fas fa-play"></i></a>
-        <div class="w-6 h-6 rounded-md border-2 border-white overflow-hidden"><img src="https://via.placeholder.com/50" class="w-full h-full object-cover"></div>
+    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-[100] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+        
+        <a href="index.html" class="text-center text-gray-400 hover:text-blue-600 group flex flex-col items-center transition-all">
+            <i class="fas fa-heart text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <p class="text-[10px] font-semibold">For You</p>
+        </a>
+
+        <a href="fast.html" class="text-center text-blue-600 group flex flex-col items-center">
+            <i class="fas fa-play-circle text-xl mb-0.5 transition-transform group-hover:scale-110"></i>
+            <p class="text-[10px] font-bold">Fast</p>
+        </a>
+
+        <div class="text-center text-gray-400 hover:text-blue-600 group flex flex-col items-center transition-all cursor-pointer">
+            <i class="fas fa-compass text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <p class="text-[10px] font-semibold">Discover</p>
+        </div>
+
+        <div class="text-center text-gray-400 hover:text-blue-600 group flex flex-col items-center transition-all cursor-pointer">
+            <i class="fas fa-book text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <p class="text-[10px] font-semibold">Library</p>
+        </div>
+
+        <div class="text-center text-gray-400 hover:text-blue-600 group flex flex-col items-center transition-all cursor-pointer">
+            <i class="fas fa-user text-lg mb-0.5 transition-transform group-hover:scale-110"></i>
+            <p class="text-[10px] font-semibold">Me</p>
+        </div>
+
     </footer>
 
 </body>
