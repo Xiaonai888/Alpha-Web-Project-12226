@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow - Discovery Professional</title>
+    <title>Shadow - Full Discovery Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,7 +14,6 @@
         .book-card { transition: all 0.3s ease; border: 1px solid #f1f5f9; }
         .book-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08); border-color: #e2e8f0; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        
         .tab-btn.active { color: var(--shadow-primary); font-weight: 800; border-bottom: 3px solid var(--shadow-primary); }
         .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
         .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); }
@@ -28,7 +27,7 @@
             <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100"><i class="fa-solid fa-chevron-left text-lg"></i></button>
             <div class="relative flex-1">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="Search Shadow..." class="w-full bg-white border border-gray-200 py-3 pl-12 pr-4 rounded-2xl outline-none focus:border-indigo-400 shadow-sm">
+                <input type="text" placeholder="Search Shadow..." class="w-full bg-white border border-gray-200 py-3 pl-12 pr-4 rounded-2xl outline-none shadow-sm">
             </div>
         </div>
     </header>
@@ -41,171 +40,72 @@
             <button onclick="openTab(event, 'recommended')" class="tab-btn pb-3 text-sm font-semibold text-gray-400 whitespace-nowrap">Recommended</button>
         </nav>
 
-        <div id="trending" class="tab-content block animate-fadeIn">
-            <div class="flex items-center space-x-3 mb-6">
-                <div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div>
-                <h2 class="text-xl font-extrabold text-gray-900">Trending Now</h2>
-            </div>
+        <div id="trending" class="tab-content block">
+            <div class="flex items-center space-x-3 mb-6"><div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div><h2 class="text-xl font-extrabold">Trending Now</h2></div>
             <div class="space-y-4">
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center rounded-br-2xl text-white font-black italic shadow-sm">1</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm ml-4"><img src="https://via.placeholder.com/200x300?text=1" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">The Shadow's Legacy</h3>
-                        <p class="text-sm font-medium text-gray-400">by Jonathan Wick</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold">
-                            <span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 24.5K</span>
-                            <span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 1.2M</span>
-                            <span class="text-amber-500 bg-amber-50 px-2 py-0.5 rounded-lg"><i class="fa-solid fa-star mr-1"></i> 4.9</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="rank-2 absolute top-0 left-0 w-10 h-10 flex items-center justify-center rounded-br-2xl text-white font-black italic shadow-sm">2</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm ml-4"><img src="https://via.placeholder.com/200x300?text=2" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Mind Games</h3>
-                        <p class="text-sm font-medium text-gray-400">by Sarah Drasner</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold">
-                            <span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 18K</span>
-                            <span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 850K</span>
-                            <span class="text-amber-500 bg-amber-50 px-2 py-0.5 rounded-lg"><i class="fa-solid fa-star mr-1"></i> 4.7</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="rank-3 absolute top-0 left-0 w-10 h-10 flex items-center justify-center rounded-br-2xl text-white font-black italic shadow-sm">3</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm ml-4"><img src="https://via.placeholder.com/200x300?text=3" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Reaper of Soul</h3>
-                        <p class="text-sm font-medium text-gray-400">by Kim Young</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold">
-                            <span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 12K</span>
-                            <span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 400K</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">4</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=4" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Midnight Sun</h3>
-                        <p class="text-sm font-medium text-gray-400">by Meyer</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold">
-                            <span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 320K</span>
-                            <span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 9K</span>
-                        </div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">5</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=5" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Silent Voices</h3>
-                        <p class="text-sm font-medium text-gray-400">by H. Cobb</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 210K</span></div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">6</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=6" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">The Last Code</h3>
-                        <p class="text-sm font-medium text-gray-400">by C. Martin</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 190K</span></div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">7</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=7" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Beyond Horizon</h3>
-                        <p class="text-sm font-medium text-gray-400">by A. Ray</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 150K</span></div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">8</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=8" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Dark Nebula</h3>
-                        <p class="text-sm font-medium text-gray-400">by X. Zhao</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 120K</span></div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">9</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=9" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Kingdom of Ashes</h3>
-                        <p class="text-sm font-medium text-gray-400">by J. Doe</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 90K</span></div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 cursor-pointer relative overflow-hidden">
-                    <div class="w-10 flex justify-center text-gray-300 font-black italic text-xl">10</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden shrink-0 shadow-sm"><img src="https://via.placeholder.com/200x300?text=10" class="w-full h-full object-cover"></div>
-                    <div class="flex-1">
-                        <h3 class="font-extrabold text-[16px] text-gray-900 leading-tight">Electric Dreams</h3>
-                        <p class="text-sm font-medium text-gray-400">by P. K. Dick</p>
-                        <div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 80K</span></div>
-                    </div>
-                    <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button>
-                </div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">1</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T1" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">The Shadow's Legacy</h3><p class="text-sm text-gray-400">by Jonathan Wick</p><div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 24.5K</span><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 1.2M</span></div></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-2 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">2</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T2" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Mind Games</h3><p class="text-sm text-gray-400">by Sarah Drasner</p><div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 18K</span><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 850K</span></div></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-3 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">3</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T3" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Reaper of Soul</h3><p class="text-sm text-gray-400">by Kim Young</p><div class="flex items-center space-x-4 mt-4 text-[12px] font-bold"><span class="text-indigo-500"><i class="fa-solid fa-heart mr-1"></i> 12K</span><span class="text-gray-400"><i class="fa-solid fa-eye mr-1"></i> 400K</span></div></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">4</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T4" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Midnight Sun</h3><p class="text-xs text-gray-400">by Meyer</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">5</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T5" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Silent Voices</h3><p class="text-xs text-gray-400">by H. Cobb</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">6</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T6" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">The Last Code</h3><p class="text-xs text-gray-400">by C. Martin</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">7</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T7" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Beyond Horizon</h3><p class="text-xs text-gray-400">by A. Ray</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">8</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T8" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Dark Nebula</h3><p class="text-xs text-gray-400">by X. Zhao</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">9</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T9" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Kingdom of Ashes</h3><p class="text-xs text-gray-400">by J. Doe</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300 font-black italic text-xl">10</div><div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden"><img src="https://via.placeholder.com/200x300?text=T10" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Electric Dreams</h3><p class="text-xs text-gray-400">by P. K. Dick</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
             </div>
         </div>
 
-        <div id="popular" class="tab-content hidden animate-fadeIn">
-            <div class="flex items-center space-x-3 mb-6">
-                <div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div>
-                <h2 class="text-xl font-extrabold text-gray-900">Most Popular</h2>
-            </div>
+        <div id="popular" class="tab-content hidden">
+            <div class="flex items-center space-x-3 mb-6"><div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div><h2 class="text-xl font-extrabold">Most Popular</h2></div>
             <div class="space-y-4">
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden">
-                    <div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center rounded-br-2xl text-white font-black italic">1</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden ml-4"><img src="https://via.placeholder.com/200x300?text=P1" class="w-full h-full object-cover"></div>
-                    <div class="flex-1"><h3 class="font-extrabold text-gray-900">Legendary Master</h3><p class="text-sm text-gray-400">by Master X</p></div>
-                </div>
-                </div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">1</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=P1" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">King of Fighters</h3><p class="text-sm text-gray-400">by Alex Mason</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-2 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">2</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=P2" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Secret Garden</h3><p class="text-sm text-gray-400">by Lily Rose</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-3 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">3</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=P3" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Final Fantasy</h3><p class="text-sm text-gray-400">by Square One</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">4</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P4" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Star Wars</h3><p class="text-xs text-gray-400">by Lucas Film</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">5</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P5" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Avengers</h3><p class="text-xs text-gray-400">by Marvel</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">6</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P6" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Iron Man</h3><p class="text-xs text-gray-400">by Tony Stark</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">7</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P7" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Spider-Man</h3><p class="text-xs text-gray-400">by Peter Parker</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">8</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P8" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Thor</h3><p class="text-xs text-gray-400">by Odinson</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">9</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P9" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Black Panther</h3><p class="text-xs text-gray-400">by T'Challa</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">10</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=P10" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Ant-Man</h3><p class="text-xs text-gray-400">by Scott Lang</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+            </div>
         </div>
 
-        <div id="new" class="tab-content hidden animate-fadeIn">
-            <div class="flex items-center space-x-3 mb-6">
-                <div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div>
-                <h2 class="text-xl font-extrabold text-gray-900">Just Arrived</h2>
-            </div>
+        <div id="new" class="tab-content hidden">
+            <div class="flex items-center space-x-3 mb-6"><div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div><h2 class="text-xl font-extrabold">New Releases</h2></div>
             <div class="space-y-4">
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden">
-                    <div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center rounded-br-2xl text-white font-black italic">1</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden ml-4"><img src="https://via.placeholder.com/200x300?text=N1" class="w-full h-full object-cover"></div>
-                    <div class="flex-1"><h3 class="font-extrabold text-gray-900">New Era Begins</h3><p class="text-sm text-gray-400">by Author New</p></div>
-                </div>
-                </div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">1</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=N1" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">New Era</h3><p class="text-sm text-gray-400">by New Gen</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-2 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">2</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=N2" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Fresh Start</h3><p class="text-sm text-gray-400">by Artist Z</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-3 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">3</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=N3" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Next Level</h3><p class="text-sm text-gray-400">by Pro Max</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">4</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N4" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Four</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">5</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N5" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Five</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">6</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N6" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Six</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">7</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N7" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Seven</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">8</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N8" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Eight</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">9</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N9" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Nine</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">10</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=N10" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Book Ten</h3><p class="text-xs text-gray-400">by Author</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+            </div>
         </div>
 
-        <div id="recommended" class="tab-content hidden animate-fadeIn">
-            <div class="flex items-center space-x-3 mb-6">
-                <div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div>
-                <h2 class="text-xl font-extrabold text-gray-900">Recommended for You</h2>
-            </div>
+        <div id="recommended" class="tab-content hidden">
+            <div class="flex items-center space-x-3 mb-6"><div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div><h2 class="text-xl font-extrabold">Recommended</h2></div>
             <div class="space-y-4">
-                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden">
-                    <div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center rounded-br-2xl text-white font-black italic">1</div>
-                    <div class="w-20 h-28 bg-gray-100 rounded-xl overflow-hidden ml-4"><img src="https://via.placeholder.com/200x300?text=R1" class="w-full h-full object-cover"></div>
-                    <div class="flex-1"><h3 class="font-extrabold text-gray-900">Editor's Choice</h3><p class="text-sm text-gray-400">by Shadow Editor</p></div>
-                </div>
-                </div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-1 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">1</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=R1" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Editor Choice</h3><p class="text-sm text-gray-400">by Shadow Team</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-2 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">2</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=R2" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Best Seller</h3><p class="text-sm text-gray-400">by Famous Guy</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4 relative overflow-hidden"><div class="rank-3 absolute top-0 left-0 w-10 h-10 flex items-center justify-center text-white font-black italic shadow-sm">3</div><div class="w-20 h-28 bg-gray-100 rounded-xl ml-4 overflow-hidden"><img src="https://via.placeholder.com/200x300?text=R3" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-extrabold text-gray-900">Daily Top</h3><p class="text-sm text-gray-400">by Shadow Pro</p></div></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">4</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R4" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Four</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">5</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R5" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Five</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">6</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R6" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Six</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">7</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R7" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Seven</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">8</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R8" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Eight</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">9</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R9" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Nine</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+                <div class="book-card bg-white p-4 rounded-3xl flex items-center space-x-4"><div class="w-10 text-center text-gray-300">10</div><div class="w-20 h-28 bg-gray-100 rounded-xl"><img src="https://via.placeholder.com/200x300?text=R10" class="w-full h-full object-cover"></div><div class="flex-1"><h3 class="font-bold">Pick Ten</h3><p class="text-xs text-gray-400">by Team</p></div><button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-bold">Read</button></div>
+            </div>
         </div>
-
     </main>
 
-    <footer class="fixed bottom-0 left-0 right-0 bg-white/90 premium-blur border-t border-gray-100 py-3 z-[150]">
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 py-3 z-[150]">
         <div class="flex justify-around items-center max-w-lg mx-auto">
             <a href="index.html" class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-heart text-xl"></i><span class="text-[10px] mt-1 font-bold">For You</span></a>
             <a href="fast.html" class="flex flex-col items-center text-gray-400"><i class="fa-solid fa-circle-play text-xl"></i><span class="text-[10px] mt-1 font-bold">Fast</span></a>
