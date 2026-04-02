@@ -3,191 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Discover - Echo Your World</title>
+    <title>Echo - Premium Feed</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&display=swap');
-        body { font-family: 'Kantumruy Pro', sans-serif; background-color: #f0f2f5; color: #1c1e21; overflow-x: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Kantumruy+Pro:wght@400;600;700&display=swap');
+        
+        :root { --echo-primary: #3b82f6; --echo-bg: #f8fafc; --echo-text: #0f172a; }
+        body { font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif; background-color: var(--echo-bg); color: var(--echo-text); overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        .premium-card { background: #fff; border: 1px solid #f1f5f9; box-shadow: 0 4px 20px -4px rgba(0,0,0,0.03); border-radius: 24px; }
+        .tab-active { color: var(--echo-primary); font-weight: 800; border-bottom: 3px solid var(--echo-primary); }
         
-        /* Glassmorphism & Shadows */
-        .post-card { background: white; border-radius: 0px; border-bottom: 1px solid #ddd; margin-bottom: 10px; }
-        @media (min-width: 768px) { .post-card { border-radius: 12px; border: 1px solid #ddd; margin-bottom: 15px; } }
-
-        /* Slide up Comment Panel */
-        #commentPanel {
-            transition: transform 0.3s ease-out;
-            transform: translateY(100%);
-        }
-        #commentPanel.active { transform: translateY(0); }
+        /* Smooth animations */
+        .btn-press:active { transform: scale(0.96); }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .tab-active { color: #1877f2; border-bottom: 3px solid #1877f2; }
+        .modal-enter { animation: fadeIn 0.2s ease-out forwards; }
+        .sheet-enter { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Reaction Picker Hover State (Desktop) */
+        .reaction-container .reaction-picker { opacity: 0; pointer-events: none; transform: translateY(10px) scale(0.9); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reaction-container:hover .reaction-picker { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+        .reaction-icon { transition: transform 0.2s; }
+        .reaction-icon:hover { transform: scale(1.3) translateY(-5px); }
     </style>
 </head>
 <body class="pb-24">
 
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
-        <div class="px-4 py-2 flex justify-between items-center">
-            <h1 class="text-blue-600 font-extrabold text-2xl tracking-tighter italic">Echo</h1>
-            <div class="flex space-x-2">
-                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"><i class="fas fa-plus"></i></button>
-                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"><i class="fas fa-search"></i></button>
-                <button class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 text-blue-600"><i class="fab fa-facebook-messenger"></i></button>
+    <header class="sticky top-0 z-[100] bg-white/90 backdrop-blur-lg border-b border-gray-100">
+        <div class="max-w-2xl mx-auto">
+            <div class="flex justify-between items-center px-4 py-3">
+                <h1 class="text-2xl font-black text-blue-600 tracking-tight">Echo</h1>
+                <div class="flex space-x-3">
+                    <button class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors btn-press"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors btn-press relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="flex justify-around text-gray-500 font-bold text-sm">
-            <button class="flex-1 py-3 tab-active">For You</button>
-            <button class="flex-1 py-3 hover:bg-gray-50">Following</button>
+            <nav class="flex px-4">
+                <button onclick="switchTab('fresh')" id="tab-fresh" class="tab-btn tab-active flex-1 py-3 text-sm font-bold text-center transition-all">Fresh</button>
+                <button onclick="switchTab('following')" id="tab-following" class="tab-btn flex-1 py-3 text-sm font-semibold text-gray-400 text-center transition-all">Following</button>
+            </nav>
         </div>
     </header>
 
-    <div class="bg-white p-4 mb-2 shadow-sm">
-        <div class="flex items-center space-x-3 mb-4">
-            <div class="w-10 h-10 rounded-full overflow-hidden bg-gray-200"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
-            <button class="flex-1 bg-gray-100 rounded-full py-2 px-4 text-left text-gray-500 text-sm active:scale-95 transition-transform">តើអ្នកកំពុងគិតអ្វី?</button>
-        </div>
-        <div class="flex justify-between border-t pt-3 text-[11px] font-bold text-gray-600">
-            <div class="flex items-center space-x-2 px-2 py-1"><i class="fas fa-video text-red-500 text-sm"></i> <span>Live</span></div>
-            <div class="flex items-center space-x-2 px-2 py-1"><i class="fas fa-images text-green-500 text-sm"></i> <span>Photo</span></div>
-            <div class="flex items-center space-x-2 px-2 py-1"><i class="fas fa-video-slash text-purple-500 text-sm"></i> <span>Room</span></div>
-        </div>
-    </div>
-
-    <div class="bg-white py-4 mb-2 overflow-hidden border-y border-gray-200">
-        <div class="flex space-x-2 px-4 overflow-x-auto no-scrollbar">
-            <div class="min-w-[110px] h-44 bg-gray-50 rounded-xl relative overflow-hidden border border-gray-200 shrink-0">
-                <img src="https://via.placeholder.com/110x130" class="w-full h-3/4 object-cover">
-                <div class="absolute bottom-0 w-full bg-white h-1/4 flex flex-col items-center">
-                    <div class="absolute -top-4 w-8 h-8 bg-blue-600 rounded-full border-4 border-white flex items-center justify-center text-white"><i class="fas fa-plus text-xs"></i></div>
-                    <span class="text-[9px] mt-4 font-bold">Create Story</span>
-                </div>
-            </div>
-            <div class="min-w-[110px] h-44 rounded-xl relative overflow-hidden shrink-0 shadow-sm">
-                <img src="https://via.placeholder.com/220x440?text=Sovan+Story" class="w-full h-full object-cover">
-                <div class="absolute top-2 left-2 w-9 h-9 rounded-full border-4 border-blue-600 overflow-hidden"><img src="https://via.placeholder.com/50"></div>
-                <span class="absolute bottom-2 left-2 text-white text-[10px] font-bold">Sovan Dara</span>
-            </div>
-            <div class="min-w-[110px] h-44 rounded-xl relative overflow-hidden shrink-0 shadow-sm">
-                <img src="https://via.placeholder.com/220x440?text=Lina+Story" class="w-full h-full object-cover">
-                <div class="absolute top-2 left-2 w-9 h-9 rounded-full border-4 border-blue-600 overflow-hidden"><img src="https://via.placeholder.com/50"></div>
-                <span class="absolute bottom-2 left-2 text-white text-[10px] font-bold">Lina Moon</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="max-w-2xl mx-auto">
-        <div class="post-card bg-white">
-            <div class="p-3 flex justify-between items-start">
-                <div class="flex items-center space-x-3">
-                    <img src="https://via.placeholder.com/100" class="w-10 h-10 rounded-full border">
-                    <div>
-                        <div class="flex items-center space-x-1">
-                            <h4 class="font-bold text-sm">Shadow Novel Official</h4>
-                            <i class="fas fa-check-circle text-blue-500 text-[10px]"></i>
-                        </div>
-                        <p class="text-[10px] text-gray-500">15m • <i class="fas fa-globe-americas"></i></p>
+    <main class="max-w-2xl mx-auto mt-4" id="main-content">
+        
+        <section class="mb-6">
+            <div class="flex space-x-3 overflow-x-auto no-scrollbar px-4 pb-2" id="story-container">
+                <div class="flex flex-col items-center shrink-0 space-y-1.5 cursor-pointer btn-press">
+                    <div class="w-16 h-16 bg-blue-50 rounded-[20px] flex items-center justify-center border border-blue-100 relative">
+                        <i class="fa-solid fa-plus text-blue-600 text-xl"></i>
                     </div>
+                    <span class="text-[10px] font-bold text-gray-600">Create</span>
                 </div>
-                <button class="text-gray-500 p-2"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+        </section>
+
+        <section class="px-4 mb-6">
+            <div class="premium-card p-4 flex items-center space-x-3 btn-press cursor-text">
+                <img src="https://i.pravatar.cc/150?img=32" class="w-10 h-10 rounded-full object-cover border border-gray-100">
+                <div class="flex-1 bg-gray-50 rounded-full py-2.5 px-4 text-sm text-gray-500 font-medium">What's your Echo today?</div>
+                <button class="text-gray-400 hover:text-green-500 transition-colors"><i class="fa-solid fa-image text-lg"></i></button>
             </div>
-            <div class="px-3 pb-3 text-sm leading-relaxed">តួឯកប្រុសក្នុងរឿងថ្មីនេះ គឺសង្ហាខ្លាំងណាស់! តើអ្នកទាំងអស់គ្នាបានអានវគ្គទី ១០ ហើយឬនៅ? 📖✨ #Echo #Novel</div>
-            <img src="https://via.placeholder.com/800x500?text=Shadow+Novel+Update" class="w-full h-auto cursor-pointer">
-            
-            <div class="px-3 py-2 flex justify-between items-center text-gray-500 text-[11px] border-b mx-2">
-                <div class="flex items-center space-x-1">
-                    <span class="flex -space-x-1.5">
-                        <i class="fas fa-thumbs-up bg-blue-500 text-white p-1 rounded-full text-[8px] border border-white"></i>
-                        <i class="fas fa-heart bg-red-500 text-white p-1 rounded-full text-[8px] border border-white"></i>
-                    </span>
-                    <span class="pl-1">1.2K</span>
+        </section>
+
+        <section class="mb-6 hidden" id="reels-section">
+            <div class="px-4 mb-3 flex justify-between items-center">
+                <h3 class="font-extrabold text-sm text-gray-800">Echo Shorts</h3>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+            </div>
+            <div class="flex space-x-3 overflow-x-auto no-scrollbar px-4 pb-2" id="reels-container">
                 </div>
-                <div>45 Comments • 12 Echoes</div>
+        </section>
+
+        <div id="feed-container" class="space-y-5 px-4 pb-4">
             </div>
 
-            <div class="flex py-1 px-2">
-                <button onclick="toggleLike(this)" class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-md text-gray-600 transition-colors">
-                    <i class="far fa-thumbs-up"></i> <span class="text-xs font-bold">Like</span>
-                </button>
-                <button onclick="openComments()" class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-md text-gray-600">
-                    <i class="far fa-comment"></i> <span class="text-xs font-bold">Comment</span>
-                </button>
-                <button onclick="alert('Echoed to your profile!')" class="flex-1 flex items-center justify-center space-x-2 py-2 hover:bg-gray-100 rounded-md text-gray-600">
-                    <i class="fas fa-bullhorn"></i> <span class="text-xs font-bold">Echo</span>
-                </button>
-            </div>
+        <div id="loading-spinner" class="py-8 text-center">
+            <div class="inline-block w-8 h-8 border-4 border-gray-100 border-t-blue-600 rounded-full animate-spin"></div>
+            <p class="text-[10px] text-gray-400 mt-3 font-bold uppercase tracking-widest">Loading Fresh Content</p>
         </div>
-    </div>
 
-    <div id="commentPanel" class="fixed bottom-0 left-0 w-full h-[80vh] bg-white z-[200] rounded-t-3xl shadow-2xl border-t border-gray-200">
-        <div class="flex flex-col h-full">
-            <div class="flex justify-between items-center p-4 border-b">
-                <span class="font-bold">Comments</span>
-                <button onclick="closeComments()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
-                <div class="flex space-x-2">
-                    <img src="https://via.placeholder.com/50" class="w-8 h-8 rounded-full">
-                    <div class="bg-gray-100 p-2 rounded-2xl text-xs">
-                        <p class="font-bold">User 888</p>
-                        <p>រឿងនេះជក់ចិត្តខ្លាំងណាស់បង! Echo ឱ្យមិត្តភក្តិមើលដែរ។</p>
-                    </div>
-                </div>
-            </div>
-            <div class="p-4 border-t flex items-center space-x-2">
-                <div class="w-8 h-8 rounded-full overflow-hidden bg-gray-200"><img src="https://via.placeholder.com/50"></div>
-                <input type="text" placeholder="Write a comment..." class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500">
-                <button class="text-blue-600 font-bold text-sm">Post</button>
-            </div>
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-100 py-3 z-[90]">
+        <div class="flex justify-around items-center max-w-2xl mx-auto px-2">
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors"><i class="fa-solid fa-house text-xl"></i><span class="text-[9px] mt-1 font-bold">Home</span></a>
+            <a href="#" class="flex flex-col items-center text-blue-600"><i class="fa-solid fa-compass text-xl"></i><span class="text-[9px] mt-1 font-bold">Discover</span></a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors relative"><i class="fa-solid fa-square-plus text-3xl -mt-2 text-blue-600"></i></a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors"><i class="fa-solid fa-book-open text-xl"></i><span class="text-[9px] mt-1 font-bold">Library</span></a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors"><i class="fa-solid fa-user text-xl"></i><span class="text-[9px] mt-1 font-bold">Mine</span></a>
         </div>
-    </div>
-
-    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-[150] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-        <a href="index.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
-            <i class="fas fa-heart text-lg mb-0.5"></i>
-            <p class="text-[10px]">For You</p>
-        </a>
-        <a href="fast.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
-            <i class="fas fa-play-circle text-lg mb-0.5"></i>
-            <p class="text-[10px]">Fast</p>
-        </a>
-        <a href="discover.html" class="text-center text-blue-600 flex flex-col items-center">
-            <i class="fas fa-compass text-xl mb-0.5"></i>
-            <p class="text-[10px] font-bold">Discover</p>
-        </a>
-        <a href="library.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
-        <i class="fas fa-book text-lg mb-0.5"></i>
-        <p class="text-[10px]">Library</p>
-    </a>
-    <a href="me.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
-        <i class="fas fa-user text-lg mb-1"></i>
-        <p class="text-[10px]">Me</p>
-    </a>
-</footer>
-    </a>
-    <a href="me.html" class="text-center text-gray-400 hover:text-blue-600 flex flex-col items-center">
-        <i class="fas fa-user text-lg mb-0.5"></i>
-        <p class="text-[10px]">Me</p>
-    </a>
-</footer>
     </footer>
+<div id="overlay-bg" class="fixed inset-0 bg-black/60 z-[150] hidden modal-enter" onclick="closeAllModals()"></div>
+
+    <div id="post-menu-modal" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-[32px] z-[160] hidden sheet-enter max-w-2xl mx-auto">
+        <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mt-4 mb-2"></div>
+        <div class="p-5 space-y-1">
+            <button class="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-2xl transition-colors btn-press text-left"><div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-regular fa-bookmark text-gray-700 text-lg"></i></div><span class="font-bold text-gray-800 text-sm">Save Post</span></button>
+            <button class="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-2xl transition-colors btn-press text-left"><div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-link text-gray-700 text-lg"></i></div><span class="font-bold text-gray-800 text-sm">Copy Link</span></button>
+            <div class="h-px bg-gray-100 my-2"></div>
+            <button class="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-2xl transition-colors btn-press text-left"><div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-volume-xmark text-gray-700 text-lg"></i></div><div><p class="font-bold text-gray-800 text-sm">Mute Author</p><p class="text-xs text-gray-400">Stop seeing posts from this account</p></div></button>
+            <button onclick="openReportModal()" class="w-full flex items-center space-x-4 p-4 hover:bg-red-50 rounded-2xl transition-colors btn-press text-left"><div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center"><i class="fa-regular fa-flag text-red-500 text-lg"></i></div><span class="font-bold text-red-500 text-sm">Report Post</span></button>
+        </div>
+    </div>
+
+    <div id="report-modal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-white rounded-[28px] z-[170] hidden modal-enter overflow-hidden shadow-2xl">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-black text-lg text-gray-900" id="report-title">Report Content</h3>
+                <button onclick="closeAllModals()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="report-step-1" class="space-y-2 max-h-[60vh] overflow-y-auto no-scrollbar pb-2">
+                <p class="text-sm text-gray-500 mb-4 font-medium">Why are you reporting this post? Your report is anonymous.</p>
+                <button onclick="nextReportStep('Spam')" class="w-full flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors text-left group"><span class="font-semibold text-sm text-gray-700 group-hover:text-blue-700">Spam or misleading</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></button>
+                <button onclick="nextReportStep('Harassment')" class="w-full flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors text-left group"><span class="font-semibold text-sm text-gray-700 group-hover:text-blue-700">Harassment or bullying</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></button>
+                <button onclick="nextReportStep('Hate')" class="w-full flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors text-left group"><span class="font-semibold text-sm text-gray-700 group-hover:text-blue-700">Hate or abusive content</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></button>
+                <button onclick="nextReportStep('Violence')" class="w-full flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors text-left group"><span class="font-semibold text-sm text-gray-700 group-hover:text-blue-700">Violence or dangerous content</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></button>
+                <button onclick="nextReportStep('Other')" class="w-full flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors text-left group"><span class="font-semibold text-sm text-gray-700 group-hover:text-blue-700">Something else</span><i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i></button>
+            </div>
+            <div id="report-step-2" class="hidden">
+                <p class="text-sm text-gray-500 mb-6 font-medium">What would you like to do?</p>
+                <div class="space-y-3 mb-6">
+                    <label class="flex items-center space-x-3 p-4 border border-gray-100 rounded-xl cursor-pointer hover:bg-gray-50">
+                        <input type="radio" name="report_action" checked class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                        <span class="font-semibold text-sm text-gray-800">Submit report only</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 border border-gray-100 rounded-xl cursor-pointer hover:bg-gray-50">
+                        <input type="radio" name="report_action" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                        <div><p class="font-semibold text-sm text-gray-800">Report & Mute Author</p><p class="text-xs text-gray-400">You won't see their posts.</p></div>
+                    </label>
+                </div>
+                <button onclick="showReportSuccess()" class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl btn-press">Submit Report</button>
+            </div>
+            <div id="report-step-3" class="hidden text-center py-6">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fa-solid fa-check text-2xl text-green-500"></i></div>
+                <h4 class="font-black text-lg text-gray-900 mb-2">Report Received</h4>
+                <p class="text-sm text-gray-500 mb-6">Thanks for helping keep Echo safe.</p>
+                <button onclick="closeAllModals()" class="w-full bg-gray-100 text-gray-800 font-bold py-3.5 rounded-xl btn-press hover:bg-gray-200">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="echo-share-modal" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-[32px] z-[160] hidden sheet-enter max-w-2xl mx-auto pb-8">
+        <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mt-4 mb-4"></div>
+        <h3 class="text-center font-black text-lg text-gray-900 mb-6">Echo to...</h3>
+        <div class="px-6 space-y-3">
+            <button class="w-full bg-blue-50 text-blue-600 font-bold py-4 rounded-2xl flex items-center justify-center space-x-2 btn-press"><i class="fa-solid fa-retweet text-lg"></i><span>Echo to Fresh Feed</span></button>
+            <button class="w-full bg-gray-50 text-gray-700 font-bold py-4 rounded-2xl flex items-center justify-center space-x-2 hover:bg-gray-100 btn-press"><i class="fa-solid fa-user-group text-lg"></i><span>Echo to Following</span></button>
+            <button class="w-full border border-gray-200 text-gray-700 font-bold py-4 rounded-2xl flex items-center justify-center space-x-2 hover:bg-gray-50 btn-press"><i class="fa-solid fa-paper-plane text-lg text-gray-400"></i><span>Send Privately</span></button>
+            <button onclick="closeAllModals()" class="w-full text-gray-400 font-bold py-4 text-sm mt-2">Cancel</button>
+        </div>
+    </div>
+
+    <div id="comments-drawer" class="fixed bottom-0 left-0 right-0 bg-white rounded-t-[32px] z-[160] hidden sheet-enter max-w-2xl mx-auto h-[80vh] flex flex-col shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+        <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mt-4 mb-2 shrink-0"></div>
+        <div class="flex justify-between items-center px-6 pb-3 border-b border-gray-100 shrink-0">
+            <h3 class="font-black text-lg text-gray-900">Comments <span class="text-gray-400 text-sm font-semibold ml-1">124</span></h3>
+            <div class="flex items-center space-x-1 text-sm font-semibold text-gray-500 cursor-pointer hover:bg-gray-50 px-3 py-1.5 rounded-full"><i class="fa-solid fa-arrow-down-short-wide mr-1"></i> Relevant</div>
+        </div>
+        <div class="flex-1 overflow-y-auto no-scrollbar p-6 space-y-6" id="comment-list">
+            <div class="flex space-x-3">
+                <img src="https://i.pravatar.cc/150?img=12" class="w-8 h-8 rounded-full shrink-0">
+                <div class="flex-1">
+                    <div class="bg-gray-50 rounded-2xl p-3 inline-block w-full">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="font-bold text-sm text-gray-900">David Chen</span>
+                            <i class="fa-solid fa-ellipsis text-gray-400 text-xs p-1 cursor-pointer"></i>
+                        </div>
+                        <p class="text-sm text-gray-700">This UI update looks incredibly clean! Great job to the design team. Can't wait to test it out.</p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-1.5 px-2 text-[11px] font-bold text-gray-500">
+                        <span>2h</span><button class="hover:text-blue-600">Like</button><button class="hover:text-blue-600">Reply</button>
+                        <div class="flex items-center space-x-1 text-blue-600"><i class="fa-solid fa-heart text-[10px]"></i><span>12</span></div>
+                    </div>
+                    <div class="flex space-x-3 mt-3">
+                        <img src="https://i.pravatar.cc/150?img=32" class="w-6 h-6 rounded-full shrink-0">
+                        <div>
+                            <div class="bg-gray-50 rounded-2xl p-2.5 inline-block">
+                                <span class="font-bold text-xs text-gray-900 block">Me</span>
+                                <p class="text-xs text-gray-700">Thanks David! Appreciate the feedback.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <img src="https://i.pravatar.cc/150?img=45" class="w-8 h-8 rounded-full shrink-0">
+                <div class="flex-1">
+                    <div class="bg-gray-50 rounded-2xl p-3 inline-block">
+                        <span class="font-bold text-sm text-gray-900 block mb-1">Elena Rostova</span>
+                        <p class="text-sm text-gray-700">Is the lazy loading implemented yet? I want to scroll forever! 😍</p>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-1.5 px-2 text-[11px] font-bold text-gray-500">
+                        <span>5h</span><button class="hover:text-blue-600">Like</button><button class="hover:text-blue-600">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shrink-0 p-4 border-t border-gray-100 bg-white">
+            <div class="flex items-end space-x-3">
+                <img src="https://i.pravatar.cc/150?img=32" class="w-9 h-9 rounded-full shrink-0 mb-1">
+                <div class="flex-1 bg-gray-50 rounded-[20px] flex items-center px-4 py-2 border border-gray-200 focus-within:border-blue-400 focus-within:bg-white transition-colors">
+                    <textarea rows="1" placeholder="Write an Echo..." class="w-full bg-transparent border-none outline-none text-sm resize-none py-1.5 max-h-24"></textarea>
+                    <button class="text-blue-600 font-bold ml-2 p-1.5 btn-press"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
-        function toggleLike(btn) {
-            const icon = btn.querySelector('i');
-            const span = btn.querySelector('span');
-            if (icon.classList.contains('far')) {
-                icon.className = 'fas fa-thumbs-up';
-                btn.style.color = '#1877f2';
-            } else {
-                icon.className = 'far fa-thumbs-up';
-                btn.style.color = '#4b5563';
+        // --- 1. INITIALIZATION & DATA ---
+        let currentTab = 'fresh';
+        let postsLoaded = 0;
+        const maxPosts = 30;
+        let isFetching = false;
+
+        const reactions = [
+            { name: 'Like', icon: 'fa-thumbs-up', color: 'text-blue-600', bg: 'bg-blue-100' },
+            { name: 'Love', icon: 'fa-heart', color: 'text-red-500', bg: 'bg-red-100' },
+            { name: 'Laugh', icon: 'fa-face-laugh-squint', color: 'text-yellow-500', bg: 'bg-yellow-100' },
+            { name: 'Wow', icon: 'fa-face-surprise', color: 'text-orange-500', bg: 'bg-orange-100' },
+            { name: 'Sad', icon: 'fa-face-sad-tear', color: 'text-blue-400', bg: 'bg-blue-100' },
+            { name: 'Angry', icon: 'fa-face-angry', color: 'text-red-600', bg: 'bg-red-100' },
+            { name: 'Support', icon: 'fa-hands-holding-heart', color: 'text-green-500', bg: 'bg-green-100' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generateStories();
+            generateReels();
+            loadPosts();
+        });
+
+        // --- 2. GENERATE TOP SECTIONS ---
+        function generateStories() {
+            const container = document.getElementById('story-container');
+            for(let i=1; i<=19; i++) {
+                container.innerHTML += `
+                    <div class="flex flex-col items-center shrink-0 space-y-1.5 cursor-pointer btn-press">
+                        <div class="w-16 h-16 rounded-[20px] p-[2px] bg-gradient-to-tr from-blue-500 to-purple-500">
+                            <div class="w-full h-full rounded-[18px] border-2 border-white overflow-hidden bg-white">
+                                <img src="https://i.pravatar.cc/150?u=${i}" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-700 truncate w-16 text-center">User ${i}</span>
+                    </div>
+                `;
             }
         }
 
-        function openComments() { document.getElementById('commentPanel').classList.add('active'); }
-        function closeComments() { document.getElementById('commentPanel').classList.remove('active'); }
-    </script>
+        function generateReels() {
+            const container = document.getElementById('reels-container');
+            for(let i=1; i<=6; i++) {
+                container.innerHTML += `
+                    <div class="shrink-0 w-32 h-48 bg-gray-200 rounded-2xl overflow-hidden relative group cursor-pointer shadow-sm border border-gray-100">
+                        <img src="https://picsum.photos/seed/reel${i}/300/500" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute top-2 right-2 bg-black/40 backdrop-blur text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow"><i class="fa-solid fa-play mr-1 text-[8px]"></i>15s</div>
+                        <div class="absolute bottom-3 left-3 right-3 text-white">
+                            <p class="text-[11px] font-bold leading-tight line-clamp-2 shadow-sm">Amazing moment #${i}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
 
+        // --- 3. LAZY LOADING POSTS ---
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800) {
+                loadPosts();
+            }
+        });
+
+        function loadPosts() {
+            if (isFetching || postsLoaded >= maxPosts) {
+                if(postsLoaded >= maxPosts) document.getElementById('loading-spinner').innerHTML = '<p class="text-xs text-gray-400 font-bold uppercase py-4">You are all caught up!</p>';
+                return;
+            }
+            isFetching = true;
+            document.getElementById('loading-spinner').style.display = 'block';
+
+            setTimeout(() => {
+                const feed = document.getElementById('feed-container');
+                let htmlStr = '';
+                for (let i = 0; i < 10; i++) {
+                    postsLoaded++;
+                    htmlStr += createPostHTML(postsLoaded);
+                    // Add Square Grid every 5 posts for visual variety
+                    if (postsLoaded % 5 === 0) {
+                        htmlStr += createSquareGridHTML(postsLoaded);
+                    }
+                }
+                feed.insertAdjacentHTML('beforeend', htmlStr);
+                isFetching = false;
+            }, 800); // Simulate network delay
+        }
+
+        function createPostHTML(id) {
+            // Reaction Picker Hover HTML
+            const reactionOptions = reactions.map(r => `
+                <button onclick="applyReaction(this, '${r.name}', '${r.icon}', '${r.color}')" class="reaction-icon w-8 h-8 rounded-full ${r.bg} ${r.color} flex items-center justify-center text-sm shadow-sm hover:scale-125 mx-1 focus:outline-none">
+                    <i class="fa-solid ${r.icon}"></i>
+                </button>
+            `).join('');
+
+            return `
+                <article class="premium-card p-4 sm:p-5 modal-enter">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center space-x-3 cursor-pointer group">
+                            <div class="relative">
+                                <img src="https://i.pravatar.cc/150?u=author${id}" class="w-10 h-10 rounded-full object-cover">
+                                ${id % 3 === 0 ? '<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center"><i class="fa-solid fa-circle-check text-blue-500 text-[10px]"></i></div>' : ''}
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900 group-hover:underline">Echo Creator ${id}</h4>
+                                <div class="flex items-center space-x-1 text-[11px] font-semibold text-gray-400">
+                                    <span>${id}h ago</span> <span>•</span> <i class="fa-solid fa-earth-americas text-[9px]"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="openPostMenu()" class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"><i class="fa-solid fa-ellipsis"></i></button>
+                    </div>
+                    
+                    <p class="text-[14px] leading-relaxed text-gray-800 mb-3 font-medium">Just testing out the new Echo platform update. The professional design language and spacing feels absolutely incredible. What do you guys think? 🚀✨</p>
+                    
+                    ${id % 2 !== 0 ? `
+                    <div class="aspect-[4/3] bg-gray-100 rounded-2xl overflow-hidden mb-3 border border-gray-100 cursor-pointer">
+                        <img src="https://picsum.photos/seed/post${id}/800/600" class="w-full h-full object-cover">
+                    </div>` : ''}
+                    
+                    <div class="flex justify-between items-center pb-3 border-b border-gray-100 px-1">
+                        <div class="flex items-center space-x-1.5 cursor-pointer">
+                            <div class="flex -space-x-1">
+                                <div class="w-4 h-4 rounded-full bg-blue-500 flex items-center justify-center border border-white z-20"><i class="fa-solid fa-thumbs-up text-white text-[8px]"></i></div>
+                                <div class="w-4 h-4 rounded-full bg-red-500 flex items-center justify-center border border-white z-10"><i class="fa-solid fa-heart text-white text-[8px]"></i></div>
+                            </div>
+                            <span class="text-[12px] font-bold text-gray-500 hover:underline">${id * 14}</span>
+                        </div>
+                        <div class="flex space-x-3 text-[12px] font-bold text-gray-500">
+                            <span class="hover:underline cursor-pointer" onclick="openComments()">${id * 3} Comments</span>
+                            <span class="hover:underline cursor-pointer">${id} Echoes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-1 mt-1 relative reaction-container">
+                        <div class="reaction-picker absolute bottom-12 left-0 bg-white rounded-full shadow-[0_5px_25px_rgba(0,0,0,0.1)] border border-gray-100 px-2 py-1.5 flex z-50">
+                            ${reactionOptions}
+                        </div>
+                        
+                        <button class="react-btn flex-1 flex items-center justify-center space-x-2 py-2 rounded-xl text-gray-500 hover:bg-gray-50 font-bold text-[13px] transition-colors btn-press">
+                            <i class="fa-regular fa-thumbs-up text-lg"></i><span>React</span>
+                        </button>
+                        <button onclick="openComments()" class="flex-1 flex items-center justify-center space-x-2 py-2 rounded-xl text-gray-500 hover:bg-gray-50 font-bold text-[13px] transition-colors btn-press">
+                            <i class="fa-regular fa-comment text-lg"></i><span>Comment</span>
+                        </button>
+                        <button onclick="openEchoModal()" class="flex-1 flex items-center justify-center space-x-2 py-2 rounded-xl text-gray-500 hover:bg-gray-50 font-bold text-[13px] transition-colors btn-press">
+                            <i class="fa-solid fa-share-nodes text-lg"></i><span>Echo</span>
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function createSquareGridHTML(id) {
+            return `
+                <div class="grid grid-cols-3 gap-2 px-1 py-2 modal-enter">
+                    <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"><img src="https://picsum.photos/seed/sq1${id}/300" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square bg-gray-100 rounded-2xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"><img src="https://picsum.photos/seed/sq2${id}/300" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl flex flex-col items-center justify-center p-3 cursor-pointer btn-press">
+                        <div class="w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center mb-2 text-blue-600"><i class="fa-solid fa-star"></i></div>
+                        <p class="text-[10px] font-black text-blue-900 text-center uppercase tracking-tight">Echo Pages</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- 4. TAB SWITCHING ---
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('tab-fresh').classList.remove('tab-active', 'text-gray-400');
+            document.getElementById('tab-following').classList.remove('tab-active', 'text-gray-400');
+            
+            if(tab === 'fresh') {
+                document.getElementById('tab-fresh').classList.add('tab-active');
+                document.getElementById('tab-following').classList.add('text-gray-400');
+                document.getElementById('reels-section').classList.remove('hidden');
+            } else {
+                document.getElementById('tab-following').classList.add('tab-active');
+                document.getElementById('tab-fresh').classList.add('text-gray-400');
+                document.getElementById('reels-section').classList.add('hidden'); // Hide reels in following
+            }
+            
+            // Reset Feed
+            document.getElementById('feed-container').innerHTML = '';
+            postsLoaded = 0;
+            loadPosts();
+        }
+
+        // --- 5. INTERACTION LOGIC ---
+        function applyReaction(element, name, icon, color) {
+            // Find parent React button and update it
+            const reactBtn = element.closest('.reaction-container').querySelector('.react-btn');
+            reactBtn.innerHTML = `<i class="fa-solid ${icon} ${color} text-lg"></i><span class="${color}">${name}</span>`;
+            reactBtn.classList.add('bg-gray-50');
+            // Hide picker quickly after selection
+            element.closest('.reaction-picker').style.opacity = '0';
+            setTimeout(() => { element.closest('.reaction-picker').style.opacity = ''; }, 300);
+        }
+
+        // --- 6. MODAL MANAGEMENT ---
+        const overlay = document.getElementById('overlay-bg');
+        
+        function closeAllModals() {
+            overlay.classList.add('hidden');
+            document.getElementById('post-menu-modal').classList.add('hidden');
+            document.getElementById('report-modal').classList.add('hidden');
+            document.getElementById('echo-share-modal').classList.add('hidden');
+            document.getElementById('comments-drawer').classList.add('hidden');
+            // Reset report steps
+            document.getElementById('report-step-1').classList.remove('hidden');
+            document.getElementById('report-step-2').classList.add('hidden');
+            document.getElementById('report-step-3').classList.add('hidden');
+            document.getElementById('report-title').innerText = "Report Content";
+        }
+
+        function openPostMenu() { overlay.classList.remove('hidden'); document.getElementById('post-menu-modal').classList.remove('hidden'); }
+        function openComments() { overlay.classList.remove('hidden'); document.getElementById('comments-drawer').classList.remove('hidden'); }
+        function openEchoModal() { overlay.classList.remove('hidden'); document.getElementById('echo-share-modal').classList.remove('hidden'); }
+        
+        function openReportModal() {
+            document.getElementById('post-menu-modal').classList.add('hidden');
+            document.getElementById('report-modal').classList.remove('hidden');
+        }
+
+        // --- 7. REPORT FLOW LOGIC ---
+        function nextReportStep(category) {
+            document.getElementById('report-step-1').classList.add('hidden');
+            document.getElementById('report-step-2').classList.remove('hidden');
+            document.getElementById('report-title').innerText = "Confirm Action";
+        }
+        function showReportSuccess() {
+            document.getElementById('report-step-2').classList.add('hidden');
+            document.getElementById('report-step-3').classList.remove('hidden');
+            document.getElementById('report-title').innerText = "Thank You";
+        }
+
+    </script>
 </body>
 </html>
+    
