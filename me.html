@@ -2,7 +2,7 @@
 <html lang="km">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Shadow - Mine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,7 +18,7 @@
         #settingsMenu.active { display: block; }
     </style>
 </head>
-<body  style="padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));">
+<body>
 
     <div class="fixed top-0 left-0 w-full z-[110] flex justify-end px-5 py-4">
         <button onclick="toggleSettings()" class="w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full shadow-sm">
@@ -99,36 +99,11 @@
         </div>
     </div>
 
-        <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[150] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]" style="padding-top:10px; padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px));">
-        <div class="flex justify-center items-center gap-8 max-w-lg mx-auto px-2">
-
-            <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-heart text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">For You</span>
-            </a>
-
-            <a href="fast.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-circle-play text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Fast</span>
-            </a>
-
-            <a href="discover.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-compass text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Discover</span>
-            </a>
-
-            <a href="library.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-book text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Library</span>
-            </a>
-
-            <a href="me.html" class="flex flex-col items-center text-blue-600 w-14">
-                <i class="fa-solid fa-face-smile text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Mine</span>
-            </a>
-
-        </div>
-    </footer>
-
     <script>
         function toggleSettings() {
             document.getElementById('settingsMenu').classList.toggle('active');
         }
     </script>
+  <script src="footer.js"></script>
 </body>
 </html>
