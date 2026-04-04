@@ -3,118 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Fast - Reels & Friends</title>
+    <title>Echo - Fast (Reels)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&display=swap');
-        body { font-family: 'Kantumruy Pro', sans-serif; background-color: #000; margin: 0; overflow: hidden; }
-
-        .reels-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scrollbar-width: none;
-            padding-bottom: 80px;
-        }
-        .reels-container::-webkit-scrollbar { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Kantumruy+Pro:wght@400;600;700&display=swap');
         
-        .reel-item {
-            height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .icon-shadow { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); }
+        body { font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif; background-color: #000; color: #fff; overflow: hidden; -webkit-tap-highlight-color: transparent; }
         
-        /* ស្ទីលសម្រាប់ប៊ូតុងដែលជ្រើសរើស (Active Tab) */
-        .tab-active { color: white !important; opacity: 1 !important; }
-        .tab-active::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background-color: white;
-            border-radius: 50%;
-        }
+        /* លាក់ Scrollbar តែនៅតែអាចអូសបាន */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Smooth Animation សម្រាប់ប៊ូតុង */
+        .btn-press:active { transform: scale(0.92); }
+        
+        /* Animation សម្រាប់រង្វង់តន្ត្រី (Audio Disc) */
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin 4s linear infinite; }
     </style>
 </head>
 <body>
 
-    <div class="fixed top-12 left-0 w-full z-50 flex justify-center items-center px-6 text-white/60 font-bold space-x-8">
-        <button id="btnReels" onclick="switchTab('reels')" class="header-tab tab-active relative text-lg transition-all">Reels</button>
-        <button id="btnFriends" onclick="switchTab('friends')" class="header-tab relative text-lg transition-all">Friends</button>
-        <div class="absolute right-6"><i class="fas fa-camera text-xl text-white/90"></i></div>
-    </div>
-
-    <div id="reelsContent" class="reels-container no-scrollbar">
-        <div class="reel-item">
-            <img src="https://via.placeholder.com/1080x1920?text=Trending+Reel+1" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20"></div>
-            <div class="absolute right-3 bottom-32 flex flex-col items-center space-y-6 text-white z-20">
-                <div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden shadow-lg"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
-                <div class="flex flex-col items-center"><i class="fas fa-heart text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">258K</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-comment-dots text-2xl icon-shadow"></i><span class="text-[11px] mt-1 font-bold">2,152</span></div>
-                <div class="w-8 h-8 rounded-full border-2 border-white/50 bg-black mt-2 overflow-hidden shadow-md"><img src="https://via.placeholder.com/50" class="w-full h-full object-cover"></div>
-            </div>
-            <div class="relative p-4 text-white mb-24 max-w-[85%] z-10">
-                <h3 class="font-bold text-sm mb-2">trending_now <i class="fas fa-check-circle text-blue-400 text-[10px]"></i></h3>
-                <p class="text-xs opacity-90">វីដេអូដែលកំពុងល្បីខ្លាំងនាពេលនេះ! 🔥 #Trending #Shadow</p>
-            </div>
+    <header class="fixed top-0 left-0 right-0 z-50 pt-5 pb-3 px-4 flex justify-between items-center bg-gradient-to-b from-black/60 to-transparent">
+        <h1 class="text-2xl font-black text-white tracking-tight italic">Fast</h1>
+        <div class="flex space-x-4 items-center">
+            <button class="text-white hover:text-gray-300 transition-colors btn-press"><i class="fa-solid fa-magnifying-glass text-xl"></i></button>
+            <button class="text-white hover:text-gray-300 transition-colors btn-press"><i class="fa-solid fa-camera text-xl"></i></button>
         </div>
-        </div>
+    </header>
 
-    <div id="friendsContent" class="reels-container no-scrollbar hidden">
-        <div class="reel-item">
-            <img src="https://via.placeholder.com/1080x1920?text=Friend+Video+1" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20"></div>
-            <div class="absolute right-3 bottom-32 flex flex-col items-center space-y-6 text-white z-20">
-                <div class="w-10 h-10 rounded-full border-2 border-pink-500 overflow-hidden shadow-lg"><img src="https://via.placeholder.com/100" class="w-full h-full object-cover"></div>
-                <div class="flex flex-col items-center"><i class="fas fa-heart text-2xl text-red-500"></i><span class="text-[11px] mt-1 font-bold">45</span></div>
-                <div class="flex flex-col items-center"><i class="fas fa-comment-dots text-2xl"></i><span class="text-[11px] mt-1 font-bold">12</span></div>
-                <div class="w-8 h-8 rounded-full border-2 border-white/50 bg-black mt-2 overflow-hidden shadow-md"><img src="https://via.placeholder.com/50" class="w-full h-full object-cover"></div>
+    <main class="h-screen w-full overflow-y-scroll snap-y snap-mandatory no-scrollbar bg-black max-w-md mx-auto relative pb-[70px]">
+        
+        <div class="h-full w-full snap-start relative bg-gray-900 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/fast1/800/1400" class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+            
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="bg-black/30 backdrop-blur-sm rounded-full w-16 h-16 flex items-center justify-center animate-pulse"><i class="fa-solid fa-play text-white/80 text-3xl ml-1"></i></div>
             </div>
-            <div class="relative p-4 text-white mb-24 max-w-[85%] z-10">
-                <h3 class="font-bold text-sm mb-2">Your_BFF_Name 💖</h3>
-                <p class="text-xs opacity-90">តើអ្នកដឹងទេថាថ្ងៃនេះមិត្តភក្តិរបស់អ្នកធ្វើអ្វីខ្លះ? 🥰 #Friends #Vlog</p>
+
+            <div class="absolute right-3 bottom-6 flex flex-col items-center space-y-5 z-20 pb-4">
+                <div class="relative w-12 h-12 btn-press cursor-pointer mb-2">
+                    <img src="https://i.pravatar.cc/150?u=101" class="w-full h-full rounded-full border-2 border-white object-cover">
+                    <div class="absolute -bottom-1 -right-1 bg-blue-600 rounded-full w-5 h-5 flex items-center justify-center border-2 border-black"><i class="fa-solid fa-plus text-white text-[10px]"></i></div>
+                </div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors text-red-500"><i class="fa-solid fa-heart text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm text-red-500">12K</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-comment-dots text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">342</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-share-nodes text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">Echo</span></div>
+                <div class="w-10 h-10 rounded-full border-[2.5px] border-gray-600 overflow-hidden mt-3 animate-spin-slow shadow-lg"><img src="https://i.pravatar.cc/150?u=101" class="w-full h-full object-cover"></div>
+            </div>
+
+            <div class="absolute left-4 bottom-6 max-w-[75%] z-20 pb-4">
+                <h3 class="font-bold text-[15px] mb-1 hover:underline cursor-pointer flex items-center">@creator_alpha_1 <i class="fa-solid fa-circle-check text-blue-500 text-xs ml-1 bg-white rounded-full"></i></h3>
+                <p class="text-[13px] text-gray-200 line-clamp-2 leading-relaxed text-shadow">This is the new immersive scrolling experience on Echo Fast! 🚀✨ #echo #fastfeed</p>
+                <div class="flex items-center space-x-2 mt-3 text-[11px] bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 w-max border border-white/10"><i class="fa-solid fa-music"></i><span class="font-medium tracking-wide">Original Audio - Echo Beats</span></div>
             </div>
         </div>
+
+        <div class="h-full w-full snap-start relative bg-gray-900 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/fast2/800/1400" class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+            
+            <div class="absolute right-3 bottom-6 flex flex-col items-center space-y-5 z-20 pb-4">
+                <div class="relative w-12 h-12 btn-press cursor-pointer mb-2">
+                    <img src="https://i.pravatar.cc/150?u=102" class="w-full h-full rounded-full border-2 border-white object-cover">
+                    <div class="absolute -bottom-1 -right-1 bg-blue-600 rounded-full w-5 h-5 flex items-center justify-center border-2 border-black"><i class="fa-solid fa-plus text-white text-[10px]"></i></div>
+                </div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-heart text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">5.2K</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-comment-dots text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">120</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-share-nodes text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">Echo</span></div>
+                <div class="w-10 h-10 rounded-full border-[2.5px] border-gray-600 overflow-hidden mt-3 animate-spin-slow shadow-lg"><img src="https://i.pravatar.cc/150?u=102" class="w-full h-full object-cover"></div>
+            </div>
+
+            <div class="absolute left-4 bottom-6 max-w-[75%] z-20 pb-4">
+                <h3 class="font-bold text-[15px] mb-1 hover:underline cursor-pointer">@user_two</h3>
+                <p class="text-[13px] text-gray-200 line-clamp-2 leading-relaxed text-shadow">Second video is here! Perfect spacing on the footer now. #smooth</p>
+                <div class="flex items-center space-x-2 mt-3 text-[11px] bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 w-max border border-white/10"><i class="fa-solid fa-music"></i><span class="font-medium tracking-wide">Trending Sound</span></div>
+            </div>
         </div>
 
-    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-100 flex justify-around py-3 z-[100] shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-        <a href="index.html" class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-heart text-lg mb-0.5"></i><p class="text-[10px]">For You</p></a>
-        <a href="fast.html" class="text-center text-blue-600 flex flex-col items-center"><i class="fas fa-play-circle text-xl mb-0.5"></i><p class="text-[10px] font-bold">Fast</p></a>
-        <a href="discover.html" class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-compass text-lg mb-0.5"></i><p class="text-[10px]">Discover</p></a>
-    <a href="library.html" class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-book text-lg mb-0.5"></i><p class="text-[10px]">Library</p></a>
-    <a href="me.html" class="text-center text-gray-400 flex flex-col items-center"><i class="fas fa-user text-lg mb-0.5"></i><p class="text-[10px]">Me</p></a>
-    </footer>
+        <div class="h-full w-full snap-start relative bg-gray-900 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/fast3/800/1400" class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+            
+            <div class="absolute right-3 bottom-6 flex flex-col items-center space-y-5 z-20 pb-4">
+                <div class="relative w-12 h-12 btn-press cursor-pointer mb-2">
+                    <img src="https://i.pravatar.cc/150?u=103" class="w-full h-full rounded-full border-2 border-white object-cover">
+                    <div class="absolute -bottom-1 -right-1 bg-blue-600 rounded-full w-5 h-5 flex items-center justify-center border-2 border-black"><i class="fa-solid fa-plus text-white text-[10px]"></i></div>
+                </div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors text-red-500"><i class="fa-solid fa-heart text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm text-red-500">1.2M</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-comment-dots text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">14K</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-share-nodes text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">Echo</span></div>
+                <div class="w-10 h-10 rounded-full border-[2.5px] border-gray-600 overflow-hidden mt-3 animate-spin-slow shadow-lg"><img src="https://i.pravatar.cc/150?u=103" class="w-full h-full object-cover"></div>
+            </div>
 
-    <script>
-        function switchTab(type) {
-            const reelsContent = document.getElementById('reelsContent');
-            const friendsContent = document.getElementById('friendsContent');
-            const btnReels = document.getElementById('btnReels');
-            const btnFriends = document.getElementById('btnFriends');
+            <div class="absolute left-4 bottom-6 max-w-[75%] z-20 pb-4">
+                <h3 class="font-bold text-[15px] mb-1 hover:underline cursor-pointer flex items-center">@viral_star <i class="fa-solid fa-circle-check text-blue-500 text-xs ml-1 bg-white rounded-full"></i></h3>
+                <p class="text-[13px] text-gray-200 line-clamp-2 leading-relaxed text-shadow">This one went viral! Great layout for vertical content viewing.</p>
+                <div class="flex items-center space-x-2 mt-3 text-[11px] bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 w-max border border-white/10"><i class="fa-solid fa-music"></i><span class="font-medium tracking-wide">Viral Audio</span></div>
+            </div>
+        </div>
 
-            if (type === 'reels') {
-                reelsContent.classList.remove('hidden');
-                friendsContent.classList.add('hidden');
-                btnReels.classList.add('tab-active');
-                btnFriends.classList.remove('tab-active');
-            } else {
-                reelsContent.classList.add('hidden');
-                friendsContent.classList.remove('hidden');
-                btnReels.classList.remove('tab-active');
-                btnFriends.classList.add('tab-active');
+        <div class="h-full w-full snap-start relative bg-gray-900 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/fast4/800/1400" class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+            
+            <div class="absolute right-3 bottom-6 flex flex-col items-center space-y-5 z-20 pb-4">
+                <div class="relative w-12 h-12 btn-press cursor-pointer mb-2"><img src="https://i.pravatar.cc/150?u=104" class="w-full h-full rounded-full border-2 border-white object-cover"></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center"><i class="fa-solid fa-heart text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">800</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center"><i class="fa-solid fa-comment-dots text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">45</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center"><i class="fa-solid fa-share-nodes text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">Echo</span></div>
+                <div class="w-10 h-10 rounded-full border-[2.5px] border-gray-600 overflow-hidden mt-3 animate-spin-slow shadow-lg"><img src="https://i.pravatar.cc/150?u=104" class="w-full h-full object-cover"></div>
+            </div>
+
+            <div class="absolute left-4 bottom-6 max-w-[75%] z-20 pb-4">
+                <h3 class="font-bold text-[15px] mb-1 hover:underline cursor-pointer">@lifestyle_vlog</h3>
+                <p class="text-[13px] text-gray-200 line-clamp-2 leading-relaxed text-shadow">Morning coffee routine. ☕️ Enjoying the little things in life.</p>
+                <div class="flex items-center space-x-2 mt-3 text-[11px] bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 w-max border border-white/10"><i class="fa-solid fa-music"></i><span class="font-medium tracking-wide">Chill Morning Vibes</span></div>
+            </div>
+        </div>
+
+        <div class="h-full w-full snap-start relative bg-gray-900 flex items-center justify-center overflow-hidden">
+            <img src="https://picsum.photos/seed/fast5/800/1400" class="absolute inset-0 w-full h-full object-cover opacity-90">
+            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+            
+            <div class="absolute right-3 bottom-6 flex flex-col items-center space-y-5 z-20 pb-4">
+                <div class="relative w-12 h-12 btn-press cursor-pointer mb-2"><img src="https://i.pravatar.cc/150?u=105" class="w-full h-full rounded-full border-2 border-white object-cover"></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer text-red-500"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center text-red-500"><i class="fa-solid fa-heart text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm text-red-500">105K</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center"><i class="fa-solid fa-comment-dots text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">1.2K</span></div>
+                <div class="flex flex-col items-center btn-press cursor-pointer"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center"><i class="fa-solid fa-share-nodes text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">Echo</span></div>
+                <div class="w-10 h-10 rounded-full border-[2.5px] border-gray-600 overflow-hidden mt-3 animate-spin-slow shadow-lg"><img src="https://i.pravatar.cc/150?u=105" class="w-full h-full object-cover"></div>
+            </div>
+
+            <div class="absolute left-4 bottom-6 max-w-[75%] z-20 pb-4">
+                <h3 class="font-bold text-[15px] mb-1 hover:underline cursor-pointer">@tech_reviewer</h3>
+                <p class="text-[13px] text-gray-200 line-clamp-2 leading-relaxed text-shadow">Unboxing the newest gadget! The design is flawless. #tech</p>
+                <div class="flex items-center space-x-2 mt-3 text-[11px] bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 w-max border border-white/10"><i class="fa-solid fa-music"></i><span class="font-medium tracking-wide">Tech Background Music</span></div>
+            </div>
+        </div>
+
+        <script>
+            // ប្រើ JavaScript បញ្ចូលវីដេអូទី ៦ ដល់ ១០ ដើម្បីកុំឱ្យ File HTML វែងហួសហេតុពេក
+            // តែធានាថាអ្នកទទួលបាន ១០ វីដេអូពេញលេញ
+            const mainContainer = document.querySelector('main');
+            for(let i=6; i<=10; i++) {
+                mainContainer.innerHTML += `
+                <div class="h-full w-full snap-start relative bg-gray-900 flex items-center justify-center overflow-hidden">
+                    <img src="https://picsum.photos/seed/fast${i}/800/1400" class="absolute inset-0 w-full h-full object-cover opacity-90">
+                    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+                    
+                    <div class="absolute right-3 bottom-6 flex flex-col items-center space-y-5 z-20 pb-4">
+                        <div class="relative w-12 h-12 btn-press cursor-pointer mb-2">
+                            <img src="https://i.pravatar.cc/150?u=10${i}" class="w-full h-full rounded-full border-2 border-white object-cover">
+                            ${i%2===0 ? '<div class="absolute -bottom-1 -right-1 bg-blue-600 rounded-full w-5 h-5 flex items-center justify-center border-2 border-black"><i class="fa-solid fa-plus text-white text-[10px]"></i></div>' : ''}
+                        </div>
+                        <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-heart text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">${i*2}K</span></div>
+                        <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-comment-dots text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">${i*100}</span></div>
+                        <div class="flex flex-col items-center btn-press cursor-pointer group"><div class="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors"><i class="fa-solid fa-share-nodes text-white text-xl"></i></div><span class="text-[11px] font-bold mt-1 shadow-sm">Echo</span></div>
+                        <div class="w-10 h-10 rounded-full border-[2.5px] border-gray-600 overflow-hidden mt-3 animate-spin-slow shadow-lg"><img src="https://i.pravatar.cc/150?u=10${i}" class="w-full h-full object-cover"></div>
+                    </div>
+
+                    <div class="absolute left-4 bottom-6 max-w-[75%] z-20 pb-4">
+                        <h3 class="font-bold text-[15px] mb-1 hover:underline cursor-pointer">@explore_world_${i}</h3>
+                        <p class="text-[13px] text-gray-200 line-clamp-2 leading-relaxed text-shadow">Exploring the hidden gems of nature. Look at this view! 🌍 #travel</p>
+                        <div class="flex items-center space-x-2 mt-3 text-[11px] bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5 w-max border border-white/10"><i class="fa-solid fa-music"></i><span class="font-medium tracking-wide">Nature Sounds - Calm</span></div>
+                    </div>
+                </div>
+                `;
             }
-        }
-    </script>
+        </script>
+
+    </main>
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-100 py-3 z-[150] shadow-[0_-5px_20px_rgba(0,0,0,0.05)] md:hidden">
+        <div class="flex justify-center items-center gap-8 max-w-2xl mx-auto px-4">
+            <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
+                <i class="fa-solid fa-heart text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">For You</span>
+            </a>
+            <a href="fast.html" class="flex flex-col items-center text-blue-600 w-14">
+                <i class="fa-solid fa-circle-play text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Fast</span>
+            </a>
+            <a href="discover.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
+                <i class="fa-solid fa-compass text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Discover</span>
+            </a>
+            <a href="library.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
+                <i class="fa-solid fa-book text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Library</span>
+            </a>
+            <a href="me.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
+                <i class="fa-solid fa-face-smile text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Mine</span>
+            </a>
+        </div>
+    </footer>
 
 </body>
 </html>
