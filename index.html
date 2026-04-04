@@ -85,7 +85,7 @@
         }
     </style>
 </head>
-<body style="padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));">
+<body>
     <div class="page-shell">
         <header class="flex justify-between items-center px-4 py-4 sticky top-0 bg-white z-50 shadow-sm">
             <div class="flex items-center space-x-2">
@@ -206,32 +206,6 @@
         </div>
     </div>
 
-    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[150] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]" style="padding-top:10px; padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px));">
-        <div class="flex justify-center items-center gap-8 max-w-lg mx-auto px-2">
-
-            <a href="index.html" class="flex flex-col items-center text-blue-600 w-14">
-                <i class="fa-solid fa-heart text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">For You</span>
-            </a>
-
-            <a href="fast.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-circle-play text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Fast</span>
-            </a>
-
-            <a href="discover.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-compass text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Discover</span>
-            </a>
-
-            <a href="library.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-book text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Library</span>
-            </a>
-
-            <a href="me.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
-                <i class="fa-solid fa-face-smile text-xl"></i><span class="text-[9px] mt-1 font-bold uppercase">Mine</span>
-            </a>
-
-        </div>
-    </footer>
-
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper('.mySwiper', {
@@ -257,5 +231,6 @@
             },
         });
     </script>
+  <script src="footer.js"></script>
 </body>
 </html>
