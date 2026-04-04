@@ -56,13 +56,19 @@
         
         <section class="mb-6">
             <div class="flex space-x-3 overflow-x-auto no-scrollbar px-4 pb-2" id="story-container">
-                <div class="flex flex-col items-center shrink-0 space-y-1.5 cursor-pointer btn-press">
-                    <div class="w-16 h-16 bg-blue-50 rounded-[20px] flex items-center justify-center border border-blue-100 relative">
-                        <i class="fa-solid fa-plus text-blue-600 text-xl"></i>
+                <!-- Create Story Card -->
+                <div class="flex flex-col items-center shrink-0 cursor-pointer btn-press" style="width:80px;">
+                    <div style="width:80px;height:130px;border-radius:14px;overflow:hidden;position:relative;background:#f0f2f5;border:1px solid #e4e6eb;">
+                        <img src="https://i.pravatar.cc/150?img=32" style="width:100%;height:75%;object-fit:cover;display:block;">
+                        <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:36px;height:36px;background:#1877f2;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid white;">
+                            <i class="fa-solid fa-plus" style="color:white;font-size:14px;"></i>
+                        </div>
+                        <div style="position:absolute;bottom:0;left:0;right:0;background:white;height:40px;display:flex;align-items:center;justify-content:center;">
+                            <span style="font-size:11px;font-weight:700;color:#1c1e21;text-align:center;line-height:1.2;">Create Story</span>
+                        </div>
                     </div>
-                    <span class="text-[10px] font-bold text-gray-600">Create</span>
                 </div>
-                </div>
+            </div>
         </section>
 
         <section class="px-4 mb-6">
@@ -235,15 +241,20 @@
         // --- 2. GENERATE TOP SECTIONS ---
         function generateStories() {
             const container = document.getElementById('story-container');
+            const names = ['Sokha','Dara','Maly','Rith','Pisey','Vanna','Kosal','Sreyla','Bopha','Chenda','Sothy','Ratana','Leakhena','Visal','Sophy','Chanthy','Makara','Pichda','Lyda'];
             for(let i=1; i<=19; i++) {
+                const name = names[i-1] || 'User '+i;
                 container.innerHTML += `
-                    <div class="flex flex-col items-center shrink-0 space-y-1.5 cursor-pointer btn-press">
-                        <div class="w-16 h-16 rounded-[20px] p-[2px] bg-gradient-to-tr from-blue-500 to-purple-500">
-                            <div class="w-full h-full rounded-[18px] border-2 border-white overflow-hidden bg-white">
-                                <img src="https://i.pravatar.cc/150?u=${i}" class="w-full h-full object-cover">
+                    <div class="shrink-0 cursor-pointer btn-press" style="width:80px;">
+                        <div style="width:80px;height:130px;border-radius:14px;overflow:hidden;position:relative;border:3px solid #1877f2;">
+                            <img src="https://i.pravatar.cc/150?u=story${i}" style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <div style="position:absolute;top:8px;left:8px;width:34px;height:34px;border-radius:50%;border:3px solid #1877f2;overflow:hidden;background:white;">
+                                <img src="https://i.pravatar.cc/150?u=av${i}" style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                            <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 6px 6px;background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);">
+                                <span style="font-size:11px;font-weight:700;color:white;display:block;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${name}</span>
                             </div>
                         </div>
-                        <span class="text-[10px] font-bold text-gray-700 truncate w-16 text-center">User ${i}</span>
                     </div>
                 `;
             }
