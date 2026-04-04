@@ -37,3 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
     }
 });
+<script src="spotlight.js"></script>
+    <script src="footer.js"></script>
+</body>
