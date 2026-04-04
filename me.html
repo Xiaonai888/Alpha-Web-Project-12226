@@ -18,7 +18,7 @@
         #settingsMenu.active { display: block; }
     </style>
 </head>
-<body class="pb-28">
+<body  style="padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));">
 
     <div class="fixed top-0 left-0 w-full z-[110] flex justify-end px-5 py-4">
         <button onclick="toggleSettings()" class="w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-md rounded-full shadow-sm">
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-        <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 py-3 z-[150] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+        <footer class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[150] shadow-[0_-5px_20px_rgba(0,0,0,0.05)]" style="padding-top:10px; padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px));">
         <div class="flex justify-center items-center gap-8 max-w-lg mx-auto px-2">
 
             <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors w-14">
